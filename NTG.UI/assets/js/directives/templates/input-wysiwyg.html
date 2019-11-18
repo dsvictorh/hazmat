@@ -1,0 +1,10 @@
+﻿<div class="input-field" ng-hide="hide" ng-class="{'shadow': panel, 'half-field': halfField, 'left': halfField == 'left', 'right': halfField == 'right'}">
+    <label for="{{inputId}}" class="no-action">{{label}}<i class="required" ng-if="required">*</i></label>
+    <wysiwyg-edit content="model" show-image="showImage" show-color="showColor" show-print="showPrint" restrict-to-paragraph="restrictToParagraph" name="{{inputId}}" id="{{inputId}}"></wysiwyg-edit>
+    <div class="errors" ng-if="errors && errors.length">
+        <p ng-repeat="error in errors">{{error.Text}}</p>
+    </div>
+    <div class="warnings" ng-if="warnings && warnings.length">
+        <p ng-repeat="warning in warnings" ng-if="warning.applies(model)">{{warning.text}}</p>
+    </div>
+</div>

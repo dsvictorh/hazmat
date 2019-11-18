@@ -1,0 +1,5 @@
+﻿<input-text input-id="callout-green-prefix{{module.Details.Id || ''}}" model="module.Details.GreenTitlePrefix" max-length="20" label="Green Title Prefix" errors="messages['greentitleprefixcallout' + (module.Details.Id || '')]"></input-text>
+<input-text input-id="callout-subtitle{{module.Details.Id || ''}}" model="module.Details.Subtitle" max-length="50" label="Subtitle" required="true" errors="messages['subtitlecallout' + (module.Details.Id || '')]"></input-text>
+<input-text input-id="callout-button-text{{module.Details.Id || ''}}" model="module.Details.ButtonText" max-length="20" label="Button Text" errors="messages['buttontextcallout' + (module.Details.Id || '')]"></input-text>
+<input-text input-id="callout-button-link{{module.Details.Id || ''}}" model="module.Details.ButtonLink" hide="!module.Details.ButtonText" label="Button Link" errors="messages['buttonlinkcallout' + (module.Details.Id || '')]"></input-text>
+

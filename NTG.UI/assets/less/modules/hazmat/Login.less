@@ -1,0 +1,106 @@
+﻿.login{
+    form{
+        margin: 30vh auto;
+        padding: 25px;
+        border-radius: 6px;
+        border: 1px solid @color-lightgray;
+        width: 60%;
+        box-sizing: border-box;
+
+        @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+            width: 75%;
+            margin: 15vh auto;
+	    }
+
+        @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+            width: 100%;
+	    }
+    }
+   
+    figure{
+        display: inline-block;
+        width: 34%;
+        text-align: center;
+        vertical-align: top;
+        margin-top: 25px;
+
+        @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+            width: 100%;
+	    }
+
+        @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+            width: 55%;
+            display: block;
+            margin: 0 auto;
+	    }
+
+        figcaption{
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+    }
+
+    fieldset{
+        display: inline-block;
+        width: 60%;
+        margin-left: 5%;
+        border-left: 1px solid @color-lightgray;
+        vertical-align: middle;
+
+        @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+            margin-left: 3%;
+	    }
+
+        @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+            width: 100%;
+            border-left: none;
+            padding: 0;
+            margin: 0;
+	    }
+
+        button{
+            @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                width: 60%;
+                margin: 0 auto;
+                display: block;
+                margin-bottom: 5px;
+	        }
+        }
+
+        footer{
+            float: right;
+            line-height: 2;
+
+            @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                line-height: 3;
+	        }
+
+            @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                float: none;
+                text-align: center;
+                margin-top: 15px;
+                margin: 0 auto;
+                width: 50%;
+                line-height: 2;
+	        }
+
+            a{ 
+                font-size: 1.2rem;
+                margin-right: 5px;
+                cursor: pointer;
+
+                @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                    margin-right: 6px;
+	            }
+
+                @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                    margin: 0;
+	            }
+
+                &:hover{
+                    color: @color-lightblue;
+                }
+            }
+        }
+    }
+}

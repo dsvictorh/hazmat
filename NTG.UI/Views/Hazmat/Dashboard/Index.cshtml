@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+<article ng-controller="DashboardController">
+    <div>
+        <h1>Dashboard</h1>
+
+        <h2>Loot Box Claims</h2>
+        <div class="filter-form">
+            <input-text input-id="filter-email" model="filter.Email" label="Email"></input-text>
+            <input-text input-id="filter-name" model="filter.Name" label="Name"></input-text>
+            <input-date-picker input-id="filter-datefrom" model="filter.DateFrom" label="From"></input-date-picker>
+            <input-date-picker input-id="filter-dateto" model="filter.DateTo" label="To"></input-date-picker>
+            <input-check input-id="filter-redeemed" model="filter.Redeemed" label="Redeemed"></input-check>
+        </div>
+        <grid config="gridConfig" filter="filter"></grid>
+    </div>
+</article>
+
+@section Scripts{
+    <script src="@Url.Content("~/assets/js/hazmat/services/loot-box-claim-service.js")"></script>
+    <script src="@Url.Content("~/assets/js/hazmat/controllers/dashboard-controller.js")"></script>
+    <script src="@Url.Content("~/assets/js/directives/grid.js")"></script>
+}

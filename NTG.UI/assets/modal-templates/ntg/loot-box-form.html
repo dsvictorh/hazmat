@@ -1,0 +1,13 @@
+﻿<form ng-submit="claimLootBox(model)" class="loot-box-form modal-panel">
+    <header>
+        <img src="{{lootBox.imageUrl}}" alt="Loot Box" />
+        <h3>{{lootBox.title}}</h3>
+        <p>{{lootBox.text}}</p>
+    </header>
+    <input-text input-id="loot-email" model="model.Email" required="true" max-length="100" label="Email" warnings="warnings.email" errors="messages['email']"></input-text>
+    <input-text input-id="loot-first-name" model="model.FirstName" max-length="50" label="First Name" required="true" errors="messages['firstname']"></input-text>
+    <input-text input-id="loot-last-name" model="model.LastName" max-length="50" label="Last Name" required="true" errors="messages['lastname']"></input-text>
+    <footer>
+        <submit-button text="Claim" submitting-text="Claiming..." loading="submitting"></submit-button>
+    </footer>
+</form>

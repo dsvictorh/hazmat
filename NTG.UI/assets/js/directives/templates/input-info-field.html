@@ -1,0 +1,10 @@
+﻿<div class="input-field" ng-class="{'shadow': panel, 'half-field': halfField, 'left': halfField == 'left', 'right': halfField == 'right'}" ng-hide="hide">
+    <label ng-class="{'bold' : !flipBold}">{{label}}</label>
+    <p ng-class="{'bold' : flipBold}">{{model}}</p>
+    <div class="errors" ng-if="errors && errors.length">
+        <p ng-repeat="error in errors">{{error.Text}}</p>
+    </div>
+    <div class="warnings" ng-if="warnings && warnings.length">
+        <p ng-repeat="warning in warnings" ng-if="warning.applies(model)">{{warning.text}}</p>
+    </div>
+</div>

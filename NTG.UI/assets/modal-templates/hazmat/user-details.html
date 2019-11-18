@@ -1,0 +1,10 @@
+﻿<form ng-submit="saveUser(model)" class="modal-panel" ng-controller="UserController">
+    <input-text input-id="user-email" model="model.Email" required="true" max-length="100" label="Email" warnings="warnings.email" errors="messages['email']"></input-text>
+    <input-text input-id="user-first-name" model="model.FirstName" max-length="50" label="First Name" required="true" errors="messages['firstname']"></input-text>
+    <input-text input-id="user-last-name" model="model.LastName" max-length="50" label="Last Name" required="true" errors="messages['lastname']"></input-text>
+    <input-text input-id="user-password" model="model.Password" required="!model.Id" label="{{model.Id ? 'Change Password' : 'Password'}}" is-password="true" errors="messages['password']"></input-text>
+    <input-text input-id="user-verify-password" hide="!model.Password" model="model.VerifyPassword" label="Verify Password" is-password="true" errors="messages['verifypassword']"></input-text>
+    <input-dropdown input-id="user-role" model="model.RoleId" options="roles" warnings="warnings.role" display="Name" value="Id" label="Role"></input-dropdown>
+    <input-check input-id="user-active" label="Active" hide="!model.Id" model="model.Active"></input-check>
+    <submit-button text="Save Changes" submitting-text="Saving..." loading="submitting"></submit-button>
+</form>

@@ -1,0 +1,10 @@
+﻿<div class="input-field" ng-hide="hide" ng-class="{'shadow': panel, 'half-field': halfField, 'left': halfField == 'left', 'right': halfField == 'right'}">
+    <label for="{{inputId}}">{{label}}<i class="required" ng-if="required">*</i></label>
+    <input type="{{isPassword ? 'password' : 'text'}}" ng-disabled="disable" ng-attr-maxlength="{{maxLength || undefined}}" name="{{inputId}}" id="{{inputId}}" ng-model="model" />  
+    <div class="errors" ng-if="errors && errors.length">
+        <p ng-repeat="error in errors">{{error.Text}}</p>
+    </div>
+    <div class="warnings" ng-if="warnings && warnings.length">
+        <p ng-repeat="warning in warnings" ng-if="warning.applies(model)">{{warning.text}}</p>
+    </div>
+</div>

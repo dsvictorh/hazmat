@@ -1,0 +1,14 @@
+﻿<ul class="box-container">
+    <li ng-repeat="card in module.Details.ModuleSimpleCardsCards" class="box" ng-class="{ 'deleted': card.IsDelete}">
+        <div class="shadow">
+            <i class="delete-corner small" title="{{card.IsDelete ? 'Restore' : 'Delete'}} card" ng-click="deleteItem($index, module.Details.ModuleSimpleCardsCards, card.Id ? { togglePropName: 'IsDelete' } : { removeItem: true, updatePositionPropName: 'Position' })"></i>
+            <input-image-picker input-id="simplecard{{module.Details.Id}}-image{{card.Position}}" change="card.IsModified = true" folder="model.Page.UploadFolder" model="card.Image" resize="{ width: 80, height: 98}" label="Image" recommend-size="80x98" hide-list="true" compact-recommend="true" recommend-ratio="40:49" errors="messages['imagecard' + card.Position + 'simplecards' + (module.Details.Id || '')]"></input-image-picker>
+            <input-text input-id="simplecard{{module.Details.Id || ''}}-subtitle{{card.Position}}" change="card.IsModified = true" model="card.Subtitle" required="true" disable="card.IsDelete" max-length="30" label="Subtitle" errors="messages['subtitlecard' + card.Position + 'simplecards' + (module.Details.Id || '')]"></input-text>
+            <input-text input-id="simplecard{{module.Details.Id || ''}}-title{{card.Position}}" change="card.IsModified = true" model="card.Title" required="true" disable="card.IsDelete" max-length="30" label="Title" errors="messages['titlecard' + card.Position + 'simplecards' + (module.Details.Id || '')]"></input-text>
+            <sort-arrows collection="module.Details.ModuleSimpleCardsCards" change-property="IsModified" disable="card.IsDelete" item-name="card" mobile-small-vertical="true" sort-property-name="Position" index="$index"></sort-arrows>
+        </div>
+    </li>
+    <li class="box add">
+        <div class="shadow" title="Add card" ng-click="addModuleSubitem(module.Details.ModuleSimpleCardsCards, { Position: module.Details.ModuleSimpleCardsCards.length + 1, IsModified: true })"></div>
+    </li>
+</ul>

@@ -1,0 +1,404 @@
+﻿.input-field{
+    margin-bottom: 15px;
+    word-break: break-word;
+
+    &.half-field{
+        display: inline-block;
+        width: 45%;
+
+        @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+             width: 100%;
+	    }
+        
+        &.left{
+            margin-right: 4.5%;
+
+            @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                margin-right: 0;
+	        }
+        }
+
+        &.right{
+            margin-left: 4.5%;
+
+            @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                margin-left: 0;
+	        }
+        }
+    }
+
+    &.shadow{
+        padding: 10px;
+    }
+
+    &.date-time{
+        position: relative;
+        
+        i{
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            color: @color-danger;
+            font-size: 1.2rem;
+            cursor: pointer;
+            .awesome-icon('\f00d');
+        }
+
+        input{
+            cursor: pointer;
+
+            &:focus{
+                color: @color-white;
+            }
+        }
+    }
+
+    &:last-child{
+        margin-bottom: 0;
+    }
+
+    @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+        margin-bottom: 10px;
+	}
+
+    .errors{
+        font-size: 1.2rem;
+        color: @color-danger;
+        margin: 5px;
+
+        p{
+            .awesome-icon('\f071', before, @vertical-align: bottom, @margin-right: 5px);
+        }
+    }
+
+    .warnings{
+        font-size: 1.2rem;
+        color: @color-warning;
+        margin: 5px;
+
+        p{
+            .awesome-icon('\f071', before, @vertical-align: bottom, @margin-right: 5px);
+        }
+    }
+
+    [disabled="disabled"]{
+        background-color: @color-disabled;
+    }
+
+    label{
+        display: block;
+        margin: 5px 1px;
+        cursor: pointer;
+        position: relative;
+        font-size: 1.5rem;
+        .user-select(none);
+
+        &.no-action{
+            cursor: default;
+        }
+        
+        .required{
+            color: @color-danger;
+            font-size: 1rem;
+            vertical-align: super;
+        }  
+    }
+    
+    .bold{
+        font-weight: 600;
+    }  
+      
+    input, select, textarea{
+        display: block;
+        padding: 5px;
+        margin: 0;
+        border: 1px solid @color-lightgray;
+        font-size: 1.5rem;
+        height: 35px;
+        border-radius: 5px;
+        width: 100%;
+        box-sizing: border-box;
+
+        &:focus{
+            border-color: @color-green;
+            outline:none;
+        }
+    }
+
+    textarea{
+       height: 250px;
+       resize: none;
+    }
+}
+
+.image-picker{
+    > figure{
+        max-width: 500px;
+    }
+
+    &.with-file{
+        li.add{
+            .loading(@color-green, 200%, center, fade(@color-gray, 50%));
+
+            &:before{
+                display: none;
+            } 
+        }
+
+        li:not(.add){
+            cursor: not-allowed;
+            opacity: 0;
+            width: 0;
+            min-width: 0;
+
+            img{
+               opacity: 0;
+            }
+        }
+    }
+
+    &.single-file:not(.with-file){
+        li.add:before{
+            display: none;
+        }
+    }
+
+    .loading{
+        padding: 10px 0;
+        .loading(@color-green, 2rem, flex-start);
+    }
+
+    [type="file"]{
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        border: 0;
+    }
+
+    ul{
+        display: flex;
+        margin: 10px 0;
+        overflow-x: auto;
+        padding-bottom: 5px;
+
+        li{
+            border: 3px solid @color-gray;
+            position: relative;
+            margin-right: 10px;
+            width: 20%;
+            min-width: 150px;
+            cursor: pointer;
+            opacity: 0.8;
+            @transition: opacity 0.3s linear, min-width 0.3s linear, width 0.3s linear;
+            .transition(@transition);
+
+            img{
+                vertical-align: middle;
+                .transition(opacity 0.2s linear);
+            }
+
+            &:hover{
+                opacity: 1;
+            }
+
+            &.add{
+                border: 3px dashed @color-gray;
+                color: @color-gray;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .transition(~'color 0.1s linear, border-color 0.12s linear');
+                .awesome-icon('\f055', before, @size: 200%, @margin: 15% 0, @display: inline-block);
+
+                &:hover{
+                    border-color: @color-success;
+                    color: @color-success;
+                }     
+            }
+
+            &.selected{
+                border-color: @color-success;
+                opacity: 1;
+            }
+
+            &.removing{
+                border-color: @color-danger;
+                    
+                figure{
+                    .filter(~'grayscale(100%)');
+                }
+            }
+        }
+    }
+}
+
+.icon-picker{
+    position: relative;
+
+    span{
+        font-size: 1.1rem;
+        display: inline-block;
+        height: 3rem;
+        cursor: pointer;
+        .transition(color 0.1s linear);
+        .user-select(none);
+
+        &.disable{
+            cursor: default;
+            opacity: 0.4;
+            color: @color-disabled;
+
+            &:hover{
+               color: @color-disabled;
+            }
+        }
+
+        &:hover{
+            color: @color-white;
+        }
+    }
+
+    .icon-list{
+        border-radius: 5px;
+        border: 1px solid @color-white;
+        box-sizing: border-box;
+        width: 100%;
+        position: absolute;
+        z-index: 1;
+        overflow: hidden;
+        background: @color-lightgray;
+        padding: 10px;
+        display: none;
+
+        &.show{
+            display: block;
+        }
+
+        ul{  
+            max-height: 32vh;
+            overflow-y: auto;
+            
+            li{
+                display: inline-block;
+                margin: 10px;
+                width: ~'calc(20% - 10px)';
+
+                @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                    margin: 5px;
+                    width: ~'calc(20% - 5px)';
+	            }  
+            }
+        }
+    }
+
+    
+
+    .icon{
+        font-family: @font-awesome;
+        font-size: 3rem;
+
+        &:not(:hover){
+            &.blue{
+                color: @color-lightblue;
+            }
+
+            &.yellow{
+                color: @color-warning;
+            }
+
+            &.green{
+                color: @color-green;
+            }
+        }
+    }
+}
+
+.slider-controls{
+    margin-bottom: 20px;
+
+    .labels{
+        .clear(both);
+        position: relative;
+        margin-bottom: 5px;
+
+        span{
+		    font-size: 1.4rem;
+
+		    &.left{
+                float: left;
+		    }
+
+		    &.right{
+                float: right;
+		    }
+
+            &.center{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                font-size: 1.6rem;
+                text-align: center;
+                color: @color-lightblue;
+            }
+	    }
+    }
+
+    .slider{
+	    height: 12px;
+        border-radius: 10px;
+        margin: 4px 0;
+        background: @color-white;
+        border: solid 1px @color-green;
+        cursor: pointer;
+
+        .ui-slider-handle{
+    	    height: 31px;
+    	    width: 15px;
+	        display: block;
+	        background: url('/assets/img/slider-handle.png') 0 0 no-repeat;
+	        cursor: ew-resize;
+	        top: -5px;
+        }        
+
+        .fill{
+    	    position: absolute;
+    	    height: 100%;
+	        left: -1px;
+    	    border-radius: 10px;
+            background: @color-green;
+        }
+    }
+}
+
+input[type=checkbox]{
+    display: none;
+
+    + label{
+        font-size: 1.5rem;
+
+        i{
+            width: 14px;
+            height: 14px;
+            display: inline-block;
+            border: 1px solid @color-lightgray;
+            border-radius: 2px;
+            vertical-align: top;
+            text-align: center;
+            margin-top: -1px;
+            background: @color-white;
+
+            @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                width: 12px;
+                height: 12px;
+	        }
+        }
+    }
+
+    &:checked + label i{
+        .awesome-icon('\f00c', @vertical-align: top, @color: @color-green);
+    }
+}

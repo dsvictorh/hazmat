@@ -1,0 +1,9 @@
+﻿<form ng-submit="saveLootBoxClaim(model)" class="modal-panel" ng-controller="DashboardController">
+    <input-info-field label="Email" model="model.Email" panel="true"></input-info-field>
+    <input-info-field label="First Name" model="model.FirstName" panel="true"></input-info-field>
+    <input-info-field label="Last Name" model="model.LastName" panel="true"></input-info-field>
+    <input-info-field label="Date" model="model.Date | date:'MM/dd/yyyy hh:mma Z'" panel="true"></input-info-field>
+    <input-textarea input-id="loot-box-claim-prize" model="model.Prize" label="Prize Notes" errors="messages['prize']"></input-textarea>
+    <input-check input-id="loot-box-claim-redeemed" model="model.Redeemed" label="Redeemed"></input-check>
+    <submit-button text="Save Changes" submitting-text="Saving..." loading="submitting"></submit-button>
+</form>

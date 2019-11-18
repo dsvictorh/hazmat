@@ -1,0 +1,300 @@
+﻿@using NTG.UI.Extensions;
+@using NTG.Logic.Services;
+@using NTG.Logic.Models;
+@{
+    var afterHeroFade = false;
+}
+
+@foreach (var module in Model.Modules)
+{
+    dynamic info = ((object)module.Info).ToExpando();    
+    <article class="@Html.Raw(info.ModuleType.Name.ToLower()) @Html.Raw(info.TransparentBackground ? "hero" : string.Empty) @Html.Raw(afterHeroFade && !info.TransparentBackground ? "after-hero-fade" : string.Empty) @Html.Raw(info.Theme ? "light" : string.Empty)">
+        <div focusable-objects>
+            @if (info.LootBox)
+            {
+                <img class="loot-box" ng-if="lootBox" ng-click="showLootBoxForm(@info.Id, $event)" style="top: calc(@info.LootBoxTop% - 27px); left: calc(@info.LootBoxLeft% - 25px);" ng-src="{{lootBox.imageUrl}}" />
+            }
+            @switch ((string)info.ModuleType.Name)
+            {
+                case ModuleService.MODULE_CALLOUT:
+                    @RenderCalloutModule((ModuleCallout)module.Details, info.Position, info.Title, info.BlueTitle);
+                    break;
+                case ModuleService.MODULE_BOXES:
+                    @RenderBoxesModule((ModuleBoxes)module.Details, info.Position, info.Title, info.BlueTitle);
+                    break;
+                case ModuleService.MODULE_SIMPLE_CARDS:
+                    @RenderSimpleCardsModule((ModuleSimpleCards)module.Details, info.Position, info.Title, info.BlueTitle);
+                    break;
+                case ModuleService.MODULE_FREE_TEXT:
+                    @RenderFreeTextModule((ModuleFreeText)module.Details, info.Position, info.Title, info.BlueTitle);
+                    break;
+                case ModuleService.MODULE_PROFILE_CARDS:
+                    @RenderProfileCardsModule((ModuleProfileCards)module.Details, info.Position, info.Title, info.BlueTitle);
+                    break;
+                case ModuleService.MODULE_GALLERY:
+                    @RenderGalleryModule((ModuleGallery)module.Details, info.Position, info.Title, info.BlueTitle);
+                    break;
+                case ModuleService.MODULE_PROMO:
+                    @RenderPromoModule((ModulePromo)module.Details, info.Position, info.Title, info.BlueTitle);
+                    break;
+            }
+        </div>
+    </article>
+
+    afterHeroFade = info.TransparentBackground;
+}
+
+@helper RenderCalloutModule(ModuleCallout module, int position, string title, bool blueTitle)
+{
+    <section class="text">
+        @if (position == 1)
+                    {
+            <h1 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">
+                @if (!string.IsNullOrEmpty(module.GreenTitlePrefix))
+                {
+                    <span>@module.GreenTitlePrefix</span>
+                }
+
+                @title
+            </h1>
+        }
+        else
+        {
+            <h2 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">
+                @if (!string.IsNullOrEmpty(module.GreenTitlePrefix))
+                {
+                    <span>@module.GreenTitlePrefix</span>
+                }
+
+                @title
+            </h2>
+        }
+
+        <blockquote class="text-shadow">@module.Subtitle</blockquote>
+
+        @if (!string.IsNullOrEmpty(module.ButtonText))
+        {
+            <a href="@module.ButtonLink" class="button shadow">@module.ButtonText</a>
+        }          
+    </section>
+}
+
+
+@helper RenderBoxesModule(ModuleBoxes module, int position, string title, bool blueTitle)
+{
+    if (position == 1)
+    {
+        <h1 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title)</h1>
+    }
+    else
+    {
+        <h2 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h2>
+    }
+
+
+    @(new HtmlString(module.Text))
+    <section class="boxes-container">
+        @foreach (var box in module.ModuleBoxesBox.OrderBy(mbb => mbb.Position))
+        {
+            <div class="shadow">
+                <div>
+                    @if (!string.IsNullOrEmpty(box.Url))
+                    {
+                        <a href="@box.Url" class="content">
+                            <h3>@box.Title</h3>
+                            <figure class="@box.Color">@Html.Raw(box.Icon)</figure>
+                            <p>@box.Text</p>
+                        </a>
+                    }
+                    else
+                    {
+                        <section class="content">
+                            <h3>@box.Title</h3>
+                            <figure class="@box.Color">@Html.Raw(box.Icon)</figure>
+                            <p>@box.Text</p>
+                        </section>
+                    }
+                </div>
+            </div>
+        }
+    </section>
+}
+
+@helper RenderSimpleCardsModule(ModuleSimpleCards module, int position, string title, bool blueTitle)
+{
+    if (position == 1)
+    {
+        <h1 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h1>
+    }
+    else
+    {
+        <h2 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h2>
+    }
+
+    
+    <section class="cards-container">
+        @foreach (var card in module.ModuleSimpleCardsCards.OrderBy(mscc => mscc.Position))
+        {
+            <div class="shadow">
+                <div>
+                    <section class="content">
+                        <figure>
+                            <img src="@Url.Content(card.Image)" />
+                        </figure>
+                        <div>
+                            <h6 title="@card.Subtitle">@card.Subtitle</h6>
+                            <h5>@card.Title</h5>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        }
+    </section>
+}
+
+@helper RenderProfileCardsModule(ModuleProfileCards module, int position, string title, bool blueTitle)
+{
+    if (position == 1)
+    {
+        <h1 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h1>
+    }
+    else
+    {
+        <h2 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h2>
+    }
+
+    <section class="cards-container">
+        @foreach (var card in module.ModuleProfileCardsCards.OrderBy(mpcc => mpcc.Position))
+        {
+            <div class="shadow">
+                <section class="content">
+                    <figure>
+                        <img src="@Url.Content(card.Image)" />
+                    </figure>
+                    <div>
+                        <h3 title="@card.Name">@card.Name</h3>
+                        <ul class="social-links">
+                            @if (!string.IsNullOrEmpty(card.TwitchUrl))
+                            {
+                                <li>
+                                    <a href="@card.TwitchUrl" target="_blank" class="twitch" title="Twitch"></a>
+                                </li>
+                            }
+
+                            @if (!string.IsNullOrEmpty(card.YouTubeUrl))
+                            {
+                                <li>
+                                    <a href="@card.YouTubeUrl" target="_blank" class="youtube" title="YouTube"></a>
+                                </li>
+                            }
+
+                            @if (!string.IsNullOrEmpty(card.TwitterUrl))
+                            {
+                                <li>
+                                    <a href="@card.TwitterUrl" target="_blank" class="twitter" title="Twitter"></a>
+                                </li>
+                            }
+
+                            @if (!string.IsNullOrEmpty(card.InstagramUrl))
+                            {
+                                <li>
+                                    <a href="@card.InstagramUrl" target="_blank" class="instagram" title="Instagram"></a>
+                                </li>
+                            }
+
+                            @if (!string.IsNullOrEmpty(card.FacebookUrl))
+                            {
+                                <li>
+                                    <a href="@card.FacebookUrl" target="_blank" class="facebook" title="Facebook"></a>
+                                </li>
+                            }
+                        </ul>
+                        <ul class="other-links">
+                            @foreach (var link in card.ModuleProfileCardsCardLinks.OrderBy(mpccl => mpccl.Position))
+                            {
+                                <li>
+                                    <a href="@link.Url" target="_blank">@link.Text</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        }
+    </section>
+}
+
+@helper RenderFreeTextModule(ModuleFreeText module, int position, string title, bool blueTitle)
+{
+    if (position == 1)
+    {
+            <h1 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h1>
+    }
+    else
+    {
+            <h2 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h2>
+    }
+    @(new HtmlString(module.Text))
+}
+
+@helper RenderGalleryModule(ModuleGallery module, int position, string title, bool blueTitle)
+{
+    if (position == 1)
+    {
+            <h1 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h1>
+    }
+    else
+    {
+            <h2 class="text-shadow @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h2>
+    }
+
+    <ul class="image-container" focusable-objects>
+        @foreach (var image in module.ModuleGalleryImages.OrderBy(mgi => mgi.Position))
+        {
+            <li>
+                <figure>
+                    <img src="@Url.Content(image.Image)" alt="Gallery Image @image.Position" />
+                </figure>
+                <ul class="links-container">
+                    @foreach (var link in image.ModuleGalleryImageLinks.OrderBy(mgil => mgil.Position))
+                    {
+                        <li>
+                            <a href="@link.Image" download target="_blank">@link.Text</a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+}
+
+@helper RenderPromoModule(ModulePromo module, int position, string title, bool blueTitle)
+{
+    if (module.TitleTop)
+    {
+        if (position == 1)
+        {
+            <h1 class="text-shadow mobile @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h1>
+        }
+        else
+        {
+            <h2 class="text-shadow mobile @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h2>
+        }
+    }
+
+    <figure class="@Html.Raw(module.ImageRight ? "right" : string.Empty) shadow">
+        <img src="@Url.Content(module.Image)" alt="Promo Image" />
+    </figure>
+    <section>
+        @if (position == 1)
+        {
+            <h1 class="text-shadow @Html.Raw(module.TitleTop ? "desktop" : string.Empty) @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h1>
+        }
+        else
+        {
+            <h2 class="text-shadow @Html.Raw(module.TitleTop ? "desktop" : string.Empty) @Html.Raw(blueTitle ? "blue" : string.Empty)">@title</h2>
+        }
+        <p>@module.Text</p>
+        <a href="@module.ButtonLink" class="button shadow">@module.ButtonText</a>
+    </section>
+}

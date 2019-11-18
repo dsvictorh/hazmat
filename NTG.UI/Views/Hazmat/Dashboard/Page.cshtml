@@ -1,0 +1,77 @@
+﻿@using NTG.UI.Session
+@{
+    ViewBag.Title = (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().Equals("Create") ? "Create" : "Edit") + " Page";
+}
+
+<article class="page-editor" ng-controller="PageController">
+    <div ng-if="!pageLoaded" class="loading-page">
+        <div class="loading-icon"></div>
+    </div>
+    <div ng-if="pageLoaded && success">
+        <h1>{{model.Page.Id ? 'Edit Page - ' + pageName : 'Create Page'}}</h1>
+        <section>
+            <form ng-submit="savePageChanges()" focusable-objects>
+                <input-text input-id="page-name" model="model.Page.Name" max-length="20" label="Name" required="true" errors="messages['name']"></input-text>
+                <input-image-picker ng-if="model.Page.Id" input-id="page-hero-image" folder="model.Page.UploadFolder" model="model.Page.HeroImage" resize="{ width: 500, height: 281}" label="Hero Image" recommend-size="1920x1080"  tags="['Hero']" recommend-ratio="16:9" errors="messages['heroimage']"></input-image-picker>
+                <input-image-picker ng-if="model.Page.Id && model.Page.HeroImage" input-id="page-mobile-hero-image" folder="model.Page.UploadFolder" resize="{ width: 500, height: 384}" model="model.Page.MobileHeroImage" tags="['HeroMobile']" label="Mobile Hero Image" recommend-size="1024x768" recommend-ratio="4:3" errors="messages['mobileheroimage']"></input-image-picker>
+                <input-check input-id="page-inmenu" ng-if="model.Page.Position != 1" tooltip="Check to display this page's link in the site's top menu" label="Show in site's menu" model="model.Page.InMenu"></input-check>
+                <input-check input-id="page-inbottommenu" ng-if="model.Page.Position != 1" tooltip="Check to display this page's link in the site's bottom menu" label="Show in bottom menu" model="model.Page.InBottomMenu"></input-check>
+                <input-check input-id="page-visible" ng-if="model.Page.Position != 1" tooltip="Check to make this page visible to users" label="Active" model="model.Page.Visible"></input-check>
+                @if (SessionVariables.User.IsInRole("Admin"))
+                {
+                    <input-check input-id="page-admin-locked" tooltip="Check to lock this page from being editted by non-admin hazmat users" label="Admin Locked" model="model.Page.AdminLocked"></input-check>
+                }
+                <submit-button text="Save Changes" submitting-text="Saving..." loading="submitting"></submit-button>
+                <cancel-button ng-click="resetPage()">
+            </form>
+        </section>
+        <section class="page-modules" ng-if="model.Page.Id">
+            <h2>Modules</h2>
+            <form ng-repeat="module in modules" ng-submit="saveModule(module.Info.ModuleType.Name, module)" ng-class="{ 'expanded': module.Expanded, 'deleted': module.Delete }"  class="shadow {{module.Info.ModuleType.Name | lowercase}}" focusable-objects>
+                <i class="delete-corner" title="{{module.Delete ? 'Restore' : 'Delete'}} module" ng-click="deleteItem($index, modules, { togglePropName: 'Delete'})"></i>
+                <sort-arrows ng-if="!module.Delete" collection="modules" item-name="module" vertical="true" property-parent-structure="['Info']" sort-property-name="Position" index="$index"></sort-arrows>
+                <header>
+                    <h3>{{module.Info.ModuleType.Name}} - {{module.Info.Title}} <i ng-if="!module.Delete" ng-click="toggleExpandModule(module)"></i></h3>
+                </header>  
+                <div class="fields" ng-if="!module.Delete">
+                    <input-dropdown input-id="{{module.Info.ModuleType.Name}}-state{{module.Details.Id}}" model="module.Info.State" required="true" options="pageModuleStates" display="label" value="value" label="State" errors="messages['state' + module.Info.ModuleType.Name.toLowerCase() + module.Details.Id]"></input-dropdown>
+                    <input-text input-id="{{module.Info.ModuleType.Name}}-title{{module.Details.Id}}" model="module.Info.Title" required="true"  max-length="100" label="Title" errors="messages['title' + module.Info.ModuleType.Name.toLowerCase() + module.Details.Id]"></input-text>
+                    <input-check input-id="{{module.Info.ModuleType.Name}}-bluetitle{{module.Details.Id}}" tooltip="Check to display the title with the light blue color" label="Use blue-colored title" model="module.Info.BlueTitle"></input-check>
+                    <ng-include src="module.ModuleTemplate" include-replace></ng-include>
+                    <input-check input-id="{{module.Info.ModuleType.Name}}-theme{{module.Details.Id}}" tooltip="Check to display this module with a light theme" label="Use light theme" model="module.Info.Theme"></input-check>
+                    <input-check input-id="{{module.Info.ModuleType.Name}}-transparentbackground{{module.Details.Id}}" tooltip="Check to display this module without a background color" label="Transparent background" model="module.Info.TransparentBackground"></input-check>
+                    <input-check input-id="{{module.Info.ModuleType.Name}}-lootbox{{module.Details.Id}}" tooltip="Check to activate the loot box on this module. It will self-deactivate when someone finds it" label="Loot Box" model="module.Info.LootBox"></input-check>
+                    <input-slider suffix="%" input-id="{{module.Info.ModuleType.Name}}-lootboxtop{{module.Details.Id}}" hide="!module.Info.LootBox" half-field="left" max="100" model="module.Info.LootBoxTop" label="Loot Box Top Position" errors="messages['lootboxtop' + module.Info.ModuleType.Name.toLowerCase() + module.Details.Id]"></input-slider>
+                    <input-slider suffix="%" input-id="{{module.Info.ModuleType.Name}}-lootboxleft{{module.Details.Id}}" hide="!module.Info.LootBox" half-field="right" max="100" model="module.Info.LootBoxLeft" label="Loot Box Left Position" errors="messages['lootboxleft' + module.Info.ModuleType.Name.toLowerCase() + module.Details.Id]"></input-slider>
+                    <submit-button text="Save Changes" submitting-text="Saving..." loading="submitting"></submit-button>
+                    <cancel-button ng-click="resetModule(module)">
+                </div>                
+            </form>
+            <form ng-submit="saveModule(newModule.Info.ModuleType.Name, newModule)" class="expanded shadow {{newModule.Info.ModuleType.Name | lowercase}}" focusable-objects>
+                <header>
+                    <h3>{{newModule.moduleType ? newModule.Info.ModuleType.Name : 'Add New Module'}}</h3>
+                </header>
+                <div class="fields" ng-if="!newModule.moduleType">
+                    <input-dropdown input-id="module-type" model="newModule.moduleType" options="moduleTypes" display="label" value="value" label="Type"></input-dropdown>
+                </div>
+                <div class="fields" ng-if="newModule.moduleType">
+                    <input-dropdown input-id="{{newModule.Info.ModuleType.Name}}-state" model="newModule.Info.State" required="true" options="pageModuleStates" display="label" value="value" label="State" errors="messages['state' + newModule.Info.ModuleType.Name.toLowerCase()]"></input-dropdown>
+                    <input-text input-id="{{newModule.Info.ModuleType.Name}}-title" model="newModule.Info.Title" required="true" max-length="100" label="Title" errors="messages['title' + newModule.Info.ModuleType.Name.toLowerCase()]"></input-text>
+                    <input-check input-id="{{newModule.Info.ModuleType.Name}}-bluetitle" tooltip="Check to display the title with the light blue color" label="Use blue-colored title" model="newModule.Info.BlueTitle"></input-check>
+                    <ng-include src="newModule.ModuleTemplate" onload="module = newModule" include-replace></ng-include>
+                    <input-check input-id="{{newModule.Info.ModuleType.Name}}-theme" tooltip="Check to display this module with a light theme" label="Use light theme" model="newModule.Info.Theme"></input-check>
+                    <input-check input-id="{{newModule.Info.ModuleType.Name}}-transparentbackground" tooltip="Check to display this module without a background color" label="Transparent background" model="newModule.Info.TransparentBackground"></input-check>
+                    <input-check input-id="{{newModule.Info.ModuleType.Name}}-lootbox" tooltip="Check to activate the loot box on this module. It will self-deactivate when someone finds it" label="Loot Box" model="newModule.Info.LootBox"></input-check>
+                    <input-slider suffix="%" input-id="{{newModule.Info.ModuleType.Name}}-lootboxtop" hide="!newModule.Info.LootBox" half-field="left" max="80" model="newModule.Info.LootBoxTop" label="Loot Box Top Position" errors="messages['lootboxtop' + newModule.Info.ModuleType.Name.toLowerCase()]"></input-slider>
+                    <input-slider suffix="%" input-id="{{newModule.Info.ModuleType.Name}}-lootboxleft" hide="!newModule.Info.LootBox" half-field="right" max="80" model="newModule.Info.LootBoxLeft" label="Loot Box Left Position" errors="messages['lootboxleft' + newModule.Info.ModuleType.Name.toLowerCase()]"></input-slider>
+                    <submit-button text="Save Changes" submitting-text="Saving..." loading="submitting"></submit-button>
+                    <cancel-button ng-click="resetNewModule()">
+                </div>
+            </form>
+        </section>
+    </div> 
+</article>
+@section Scripts{
+    <script src="@Url.Content("~/assets/js/hazmat/services/page-service.js")"></script>
+    <script src="@Url.Content("~/assets/js/hazmat/controllers/page-controller.js")"></script>
+}

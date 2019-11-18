@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[SiteLog]
+(
+	[Id] INT IDENTITY (1, 1) NOT NULL, 
+    [Date] DATETIMEOFFSET NOT NULL, 
+    [IPAddress] NVARCHAR(MAX) NOT NULL, 
+	[Page] NVARCHAR(MAX) NULL, 
+	[Module] NVARCHAR(MAX) NULL, 
+    [Action] NVARCHAR(MAX) NOT NULL, 
+	[Important] BIT NOT NULL,
+    [AdminId] INT NOT NULL, 
+	CONSTRAINT [PK_SiteLog] PRIMARY KEY CLUSTERED ([Id] ASC), 
+    CONSTRAINT [FK_SiteLog_Admin_AdminId] FOREIGN KEY ([AdminId]) REFERENCES [Admin]([Id])
+)

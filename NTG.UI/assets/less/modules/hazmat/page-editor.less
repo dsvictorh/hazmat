@@ -1,0 +1,143 @@
+﻿.page-editor{
+    .page-modules{
+        margin-top: 20px;
+        border-radius: 5px;
+
+        form, .form{
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 2px solid transparent;
+            position: relative;
+
+            @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                padding: 22px;
+	        }
+
+            @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                padding: 10px;
+	        }
+
+            &.unsaved{
+                border-color: @color-warning;
+            }
+
+            &.expanded{
+                header i{
+                    .awesome-icon('\f107');
+                }
+
+                .fields{
+                    display: block;
+                }
+            }
+
+            &.deleted{
+                header{
+                    opacity: 0.3;
+                }
+            }
+
+            header{
+                position: relative;
+                 .transition(opacity 0.2s linear);
+
+                i{
+                    position: absolute;
+                    z-index: 1;
+                    top: 0;
+                    right: 0;
+                    cursor: pointer;
+                    .awesome-icon('\f105');
+                }
+            }
+
+            .fields{
+                display: none;
+            }
+        }
+    }
+
+    .box-container{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        margin: 0 0 20px;
+
+        .sub-container{
+            padding: 5px;
+            border: solid 1px @color-white;
+            border-radius: 8px;
+
+            .box{
+                flex-basis: 100%;
+                margin: 3%;
+            }
+        }
+
+        .box{
+            flex-basis: 33.33%;
+
+            @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                flex-basis: 50%;
+	        }
+
+            @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                flex-basis: 100%;
+	        }
+            
+            > div{
+                margin: 4px;
+                padding: 10px;
+                box-sizing: border-box;
+                border-radius: 8px;
+                position: relative;
+                background: fade(@color-lightblue, 70%);
+
+                @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                    padding: 5px;
+	            }
+            }
+
+            &.add{
+                > div{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    height: 50px;
+                    color: @color-warning;
+                    @transition: color 0.2s linear, background 0.3s linear;
+                    .transition(@transition);
+                    .awesome-icon('\f055', before, @size: 200%);
+
+                    &:hover{
+                        color: @color-white;
+                        background: fade(@color-success, 70%);
+                    }
+                }
+            }
+
+            &.bottom-sort {
+                
+                &:not(.add){
+                    > div{
+                        height: ~'calc(100% - 8px)';
+                        padding-bottom: 55px;
+                    }
+                }
+
+                > div{
+                    margin: 8px 4px;
+
+                    > .sort-arrows{
+                        position: absolute;
+                        bottom: 10px;
+                        left: 0;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}

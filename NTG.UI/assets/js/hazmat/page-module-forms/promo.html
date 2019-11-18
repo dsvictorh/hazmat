@@ -1,0 +1,7 @@
+﻿<input-check input-id="promo-title-top{{module.Details.Id || ''}}" tooltip="Check to display this promo's title above the image on mobile'" label="Mobile Title Above Image" model="module.Details.TitleTop"></input-check>
+<input-image-picker input-id="promo-image{{module.Details.Id || ''}}" folder="model.Page.UploadFolder" required="true" model="module.Details.Image" resize="{ width: 400, height: 400}" label="Image" recommend-size="400x400" tags="['PromoImage']" recommend-ratio="1:1" errors="messages['imagepromo' + (image.Id || '')]"></input-image-picker>
+<input-check input-id="promo-image-right{{module.Details.Id || ''}}" tooltip="Check to switch the promo image to the right and the text to the left" label="Image on the Right" model="module.Details.ImageRight"></input-check>
+<input-text input-id="promo-text{{module.Details.Id || ''}}" model="module.Details.Text" max-length="200" required="true" label="Text" errors="messages['textpromo' + (module.Details.Id || '')]"></input-text>
+<input-text input-id="promo-button-text{{module.Details.Id || ''}}" model="module.Details.ButtonText" required="true" max-length="20" label="Button Text" errors="messages['buttontextpromo' + (module.Details.Id || '')]"></input-text>
+<input-text input-id="promo-button-link{{module.Details.Id || ''}}" model="module.Details.ButtonLink" required="true" label="Button Link" errors="messages['buttonlinkpromo' + (module.Details.Id || '')]"></input-text>
+

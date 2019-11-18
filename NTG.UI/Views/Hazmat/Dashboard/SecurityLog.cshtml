@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Security Log";
+}
+
+<article ng-controller="SecurityLogController">
+    <div>
+        <h1>Security Log</h1>
+        <div class="filter-form">
+            <input-text input-id="filter-useremail" model="filter.UserEmail" label="User"></input-text>
+            <input-text input-id="filter-action" model="filter.Action" label="Action"></input-text>
+            <input-text input-id="filter-ipaddress" model="filter.IPAddress" label="IPAddress"></input-text>
+            <input-date-picker input-id="filter-datefrom" model="filter.DateFrom" label="From"></input-date-picker>
+            <input-date-picker input-id="filter-dateto" model="filter.DateTo" label="To"></input-date-picker>
+        </div>
+        <grid config="gridConfig" filter="filter"></grid>
+    </div>
+</article>
+
+@section Scripts{
+    <script src="@Url.Content("~/assets/js/hazmat/services/logs-service.js")"></script>
+    <script src="@Url.Content("~/assets/js/hazmat/controllers/security-log-controller.js")"></script>
+    <script src="@Url.Content("~/assets/js/directives/grid.js")"></script>
+}

@@ -1,0 +1,25 @@
+﻿<ul class="box-container">
+    <li ng-repeat="image in module.Details.ModuleGalleryImages" class="box bottom-sort" ng-class="{ 'deleted' : image.IsDelete}">
+        <div class="shadow">
+            <i class="delete-corner small" title="{{image.IsDelete ? 'Restore' : 'Delete'}} image" ng-click="deleteItem($index, module.Details.ModuleGalleryImages, image.Id ? { togglePropName: 'IsDelete' } : { removeItem: true, updatePositionPropName: 'Position' })"></i>
+            <input-image-picker input-id="gallery{{module.Details.Id || ''}}-image{{image.Position}}" change="image.IsModified = true" folder="model.Page.UploadFolder" model="image.Image" resize="{ width: 250, height: 141}" label="Image" recommend-size="800x450" hide-list="true" compact-recommend="true" recommend-ratio="16:9" errors="messages['imageimage' + image.Position + 'gallery' + (module.Details.Id || '')]"></input-image-picker>
+            <ul class="sub-container">
+                <li ng-repeat="link in image.ModuleGalleryImageLinks" class="box" ng-class="{ 'deleted' : link.IsDelete}">
+                    <div class="shadow">
+                        <i class="delete-corner small" title="{{link.IsDelete ? 'Restore' : 'Delete'}} link" ng-click="deleteItem($index, image.ModuleGalleryImageLinks, link.Id ? { togglePropName: 'IsDelete' } : { removeItem: true, updatePositionPropName: 'Position' })"></i>
+                        <input-text input-id="gallery{{module.Details.Id || ''}}-image{{image.Position}}-link{{link.Position}}-text" change="image.IsModified = true; link.IsModified = true" model="link.Text" required="true" max-length="15" disable="link.IsDelete" label="Text" errors="messages['textlink' + link.Position + 'galleryimage' + (image.Id || '')]"></input-text>
+                        <input-image-picker input-id="gallery{{module.Details.Id || ''}}-image{{image.Position}}-link{{link.Position}}-image" change="image.IsModified = true; link.IsModified = true" folder="model.Page.UploadFolder" model="link.Image" resize="{ width: 200, height: 101}" label="Download Image" hide-list="true" compact-recommend="true" errors="messages['imagelink' + link.Position + 'galleryimage' + (image.Id || '')]"></input-image-picker>
+                        <sort-arrows collection="image.ModuleGalleryImageLinks" change-property="IsModified" change="image.IsModified = true" disable="link.IsDelete" item-name="link" vertical="true" sort-property-name="Position" index="$index"></sort-arrows>
+                    </div>
+                </li>
+                <li class="box add">
+                    <div class="shadow" title="Add link" ng-click="addModuleSubitem(image.ModuleGalleryImageLinks, { Position: image.ModuleGalleryImageLinks.length + 1, IsModified: true })"></div>
+                </li>
+            </ul>
+            <sort-arrows collection="module.Details.ModuleGalleryImages" change-property="IsModified" disable="image.IsDelete" item-name="image" mobile-small-vertical="true" sort-property-name="Position" index="$index"></sort-arrows>
+        </div>
+    </li>
+    <li class="box add bottom-sort">
+        <div class="shadow" title="Add image" ng-click="addModuleSubitem(module.Details.ModuleGalleryImages, { Position: module.Details.ModuleGalleryImages.length + 1, ModuleGalleryImageLinks: [], IsModified: true })"></div>
+    </li>
+</ul>

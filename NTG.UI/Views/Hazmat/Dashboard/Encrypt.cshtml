@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Encrypt";
+}
+
+<form ng-controller="EncryptController" ng-submit="encrypt()">
+    <input-text input-id="text" model="text" label="Hazmat Encrypt String" errors="messages.text"></input-text>
+    <submit-button text="Encrypt" loading="submitting"></submit-button>
+    <p ng-if="encryptedText" style="margin: 10px;">Encrypt Result: <span style="border: 1px solid black; padding: 10px; font-size: 2rem; display: inline-block;">{{encryptedText}}</span></p>
+</form>
+
+
+@section Scripts{
+    <script src="@Url.Content("~/assets/js/hazmat/services/encrypt-service.js")"></script>
+    <script src="@Url.Content("~/assets/js/hazmat/controllers/encrypt-controller.js")"></script>
+}
+
+

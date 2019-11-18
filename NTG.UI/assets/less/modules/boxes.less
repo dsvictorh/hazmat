@@ -1,0 +1,124 @@
+﻿.boxes{
+    text-align: center;
+
+    &.light{
+        .boxes-container > div{
+            background: @color-gray;
+            color: @color-white;
+        }
+    }
+
+    .boxes-container{
+        margin: 40px 0 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: center;
+
+        > div{
+            width: 30%;
+            position: relative;
+            background: @color-darkblue;
+            border-radius: 10px;
+            margin: 1.66%;
+            overflow: hidden;
+
+            @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                width: 35%;
+	        }
+
+            @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+               width: 75%;
+               margin: 2.5% 0;
+	        }
+
+            > div{
+                padding-top: 100%;
+
+                > a:hover figure{
+                    &.green{
+                        text-shadow: 0 0 15px  @color-green;
+                    }
+
+                    &.yellow{
+                        text-shadow: 0 0 15px  @color-warning;
+                    }
+
+                    &.blue{
+                        text-shadow: 0 0 15px  @color-lightblue;
+                    }
+                }
+
+                @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                   padding: 0;
+	            }
+            }
+
+            .content{
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                box-sizing: border-box;
+                padding: 25px;
+                overflow: hidden;
+                color: inherit;
+                display: block;
+
+                @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                   position: static;
+	            }
+
+                @media screen and (max-width: 478px), screen and (max-device-width: 478px) {
+                    padding: 10px;
+	            }
+
+                p{
+                    @media screen and (max-width: 478px), screen and (max-device-width: 478px) {
+                       display: none;
+	                }
+                }
+
+                h3{
+                    @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                       font-size: 2vw;
+	                }
+
+                    @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                       font-size: 2.5rem;
+	                }
+                }
+
+                figure{
+                    margin-bottom: 15px;
+                    font-size: 7rem;
+                    font-family: @font-awesome;          
+                    .transition(text-shadow 0.3s linear);          
+
+                    @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                       font-size: 10vw;
+                       margin: 10% 0;
+	                }
+
+                    @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                       font-size: 8rem;
+	                }
+
+                    &.green{
+                        color: @color-green;
+                    }
+
+                    &.yellow{
+                        color: @color-warning;
+                    }
+
+                    &.blue{
+                        color: @color-lightblue;
+                    }
+                }
+               
+            }
+        }
+    }
+}

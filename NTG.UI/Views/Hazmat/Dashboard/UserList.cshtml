@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Hazmat Users";
+}
+
+<article ng-controller="UserController">
+    <div>
+        <h1>User Management</h1>
+        <div class="filter-form">
+            <input-text input-id="filter-email" model="filter.Email" label="Email"></input-text>
+            <input-text input-id="filter-name" model="filter.Name" label="Name"></input-text>
+            <input-dropdown input-id="filter-role" model="filter.RoleId" required="true" options="filterRoles" display="Name" value="Id" label="Role"></input-dropdown>
+            <input-dropdown input-id="filter-status" model="filter.Status" required="true" options="[{label: 'All', value: null}, {label: 'Active', value: true}, {label: 'Inactive', value: false}]" display="label" value="value" label="Status"></input-dropdown>
+        </div>
+        <grid config="gridConfig" filter="filter"></grid>
+    </div>
+</article>
+
+@section Scripts{
+    <script src="@Url.Content("~/assets/js/hazmat/services/user-service.js")"></script>
+    <script src="@Url.Content("~/assets/js/hazmat/controllers/user-controller.js")"></script>
+    <script src="@Url.Content("~/assets/js/directives/grid.js")"></script>
+}

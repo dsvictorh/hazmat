@@ -1,0 +1,93 @@
+﻿@using NTG.UI.Session
+@using NTG.UI.Extensions
+@{ 
+    var logs = "["
+        + "{ url: '" + Url.Action("SiteLog", "Dashboard") + "', label: 'Site'},"
+        + "{ url: '" + Url.Action("SecurityLog", "Dashboard") + "', label: 'Security'},"
+        + "{ url: '" + Url.Action("ErrorLog", "Dashboard") + "', label: 'Error'}"
+        + "]";
+}
+<!DOCTYPE html>
+<html ng-app="hazmat">
+    <head>
+        <title>Hazmat - @ViewBag.Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" /> 
+        @if (!string.IsNullOrEmpty(NTG.UI.Global.GlobalVariables.SiteSettings.MetaFaviconImageUrl))
+        {
+            <link rel="icon" href="@Url.Content(NTG.UI.Global.GlobalVariables.SiteSettings.MetaFaviconImageUrl)" />
+        }
+        @Styles.Render("~/bundles/less/hazmat")
+        @Styles.Render("~/bundles/css/hazmat/lib")
+        @if (ViewContext.RouteData.GetRequiredString("controller").Equals("Dashboard") && ViewContext.RouteData.GetRequiredString("action").Equals("Modules"))
+        {
+            @Styles.Render("~/bundles/less/hazmat-ntg")
+        }
+    </head>
+    <body ng-controller="LayoutController" ng-click="showUserMenu(false)"  ng-class="{'modal': modalTemplate}">
+        <div class="lockscreen" ng-click="closeModal()">
+            <div class="modal-body shadow" ng-class="modalSize" ng-if="modalTemplate" ng-click="$event.stopPropagation();">
+                <i class="delete-corner small" title="Close" ng-click="closeModal();"></i>
+                <div ng-include="modalTemplate" onload="model = modalModel"></div>
+            </div>
+        </div>
+        @if (ViewContext.RouteData.GetRequiredString("controller").Equals("Dashboard") && ViewContext.RouteData.GetRequiredString("action").Equals("Modules"))
+        {
+            <figure class="hero-background">
+                <img src="@Url.Content("~/assets/img/test.jpg")" />
+            </figure>
+        }
+        @if (ViewBag.HideMenu == null || !ViewBag.HideMenu)
+        {
+            <header class="site-header">
+                <h6>HAZMAT</h6>
+                <div focusable-objects prevent-bubble="true">
+                    <span focus-object ng-click="showUserMenu()">{{userDetails.fullName}}</span>
+                    <nav ng-show="userMenuExpanded" class="dropdown-menu">
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("AdminDetails", "User")" focus-object>Account Settings</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Logout", "Login")" focus-object>Log Out</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+                <div class="flex-layout">
+                    <nav ng-class="{'expanded' : menuExpanded}">
+                        <ul>
+                            <expandable-menu-item icon="&#xf0c9;" class="expand" ng-click="toggleMenu($event)"></expandable-menu-item>
+                            @if (SessionVariables.User.IsInRoles(new string[] { "Admin", "Content Manager" }))
+                            {
+                                <expandable-menu-item url="@Url.Action("Index", "Dashboard")" icon="&#xf015;" label="Dashboard"></expandable-menu-item>
+                                <expandable-menu-item icon="&#xf0f6;" label="Site Pages" ng-click="toggleSubmenu($event)" submenu="pages"></expandable-menu-item>
+                                <expandable-menu-item url="@Url.Action("Modules", "Dashboard")" icon="&#xf12e;" label="Modules Preview"></expandable-menu-item>
+                            }
+                            @if (SessionVariables.User.IsInRoles(new string[] { "Admin"}))
+                            {
+                                <expandable-menu-item icon="&#xf02d;" label="Logs" ng-click="toggleSubmenu($event)" submenu="@logs"></expandable-menu-item>
+                                <expandable-menu-item url="@Url.Action("UserList", "User")" icon="&#xf0c0;" label="Users"></expandable-menu-item>
+                                <expandable-menu-item url="@Url.Action("Index", "SiteSettings")" icon="&#xf085;" label="Site Settings"></expandable-menu-item>
+                            }
+                        </ul>
+                    </nav>
+                    <main ng-class="{'hide' : menuExpanded}">
+                        @RenderBody()
+                    </main>
+                </div>
+        }
+        else
+        {
+            <main>
+                @RenderBody()
+            </main>
+        }
+        <section class="floating-messages">
+            <p ng-repeat="message in messages.global" class="{{message.MessageType | lowercase}}" ng-class="{show: !message.remove}">{{message.Text}}</p>
+        </section> 
+        @Scripts.Render("~/bundles/js/hazmat")
+        @RenderSection("Scripts", false)
+    </body>
+</html>

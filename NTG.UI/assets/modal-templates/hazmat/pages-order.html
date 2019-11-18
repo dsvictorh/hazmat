@@ -1,0 +1,14 @@
+﻿<h3>Page Order</h3>
+<form ng-controller="PageListController" ng-submit="savePageList(model)" focusable-objects class="pages-order">
+    <div ng-repeat="page in model" class="shadow" ng-class="{ 'deleted': page.delete }">
+        <label>{{page.Name}}</label>
+        <section>
+            <sort-arrows collection="model" disable="page.delete" item-name="page" vertical="true" sort-property-name="Position" index="$index"></sort-arrows>
+            <i class="delete-corner static" title="{{page.delete ? 'Restore' : 'Delete'}} module{{page.AdminLocked ? ' - LOCKED BY ADMIN' : ''}}" ng-class="{'disabled': page.Position == 1 || (page.AdminLocked && userDetails.Role != 'Admin')}" ng-click="toggleDeletePage(page)"></i>
+        </section>
+    </div>
+    <submit-button text="Save Changes" submitting-text="Saving..." loading="submitting"></submit-button>
+    <section class="errors" ng-if="messages['pagelist'] && messages['pagelist'].length">
+        <p ng-repeat="error in messages['pagelist']">{{error.Text}}</p>
+    </section>
+</form>

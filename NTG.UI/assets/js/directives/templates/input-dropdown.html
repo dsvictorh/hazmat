@@ -1,0 +1,10 @@
+﻿<div class="input-field" ng-hide="hide" ng-class="{'shadow': panel, 'half-field': halfField, 'left': halfField == 'left', 'right': halfField == 'right'}">
+    <label for="{{inputId}}">{{label}}<i class="required" ng-if="required">*</i></label>
+    <select ng-disabled="disable" ng-options="item.{{value}} as item.{{display}} for item in options" name="{{inputId}}" id="{{inputId}}" ng-model="model"></select>
+    <div class="errors" ng-if="errors && errors.length">
+        <p ng-repeat="error in errors">{{error.Text}}</p>
+    </div>
+    <div class="warnings" ng-if="warnings && warnings.length">
+        <p ng-repeat="warning in warnings" ng-if="warning.applies(model)">{{warning.text}}</p>
+    </div>
+</div>

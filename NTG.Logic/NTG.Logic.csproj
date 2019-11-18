@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{538159BF-7A0F-4E2A-9B0B-394DBC5FC254}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NTG.Logic</RootNamespace>
+    <AssemblyName>NTG.Logic</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CloudinaryDotNet, Version=1.0.27.0, Culture=neutral, PublicKeyToken=c8234dc617ae7841, processorArchitecture=MSIL">
+      <HintPath>..\packages\CloudinaryDotNet.1.0.27\lib\net40\CloudinaryDotNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Cryptography\EncryptionService.cs" />
+    <Compile Include="ErrorLog.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LootBoxClaim.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SiteSettings.cs" />
+    <Compile Include="Models\LootBoxClaim.cs" />
+    <Compile Include="Models\ModulePromo.cs" />
+    <Compile Include="Models\ModuleGallery.cs" />
+    <Compile Include="Models\ModuleGalleryImage.cs" />
+    <Compile Include="Models\ModuleGalleryImageLink.cs" />
+    <Compile Include="Models\SecurityLog.cs" />
+    <Compile Include="Models\SiteLog.cs" />
+    <Compile Include="Models\ErrorLog.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\ModuleFreeText.cs" />
+    <Compile Include="Models\ModuleSimpleCardsCard.cs" />
+    <Compile Include="Models\ModuleSimpleCards.cs" />
+    <Compile Include="Models\ModuleProfileCardsCardLink.cs" />
+    <Compile Include="Models\ModuleProfileCards.cs" />
+    <Compile Include="Models\ModuleProfileCardsCard.cs" />
+    <Compile Include="Models\PageModule.cs" />
+    <Compile Include="Models\Page.cs" />
+    <Compile Include="Models\ModuleType.cs" />
+    <Compile Include="Models\ModuleCallout.cs" />
+    <Compile Include="Models\ModuleBoxesBox.cs" />
+    <Compile Include="Models\ModuleBoxes.cs" />
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="ModuleBoxes.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleBoxesBox.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleCallout.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleFreeText.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleGallery.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleGalleryImage.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleGalleryImageLink.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleProfileCards.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleProfileCardsCard.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleProfileCardsCardLink.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModulePromo.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleSimpleCards.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleSimpleCardsCard.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModuleType.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NTGDB.cs" />
+    <Compile Include="NTGEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NTGEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NTGEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="NTGEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NTGEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Page.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageModule.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PageModuleStates.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Role.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SecurityLog.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Services\CloudinaryService.cs" />
+    <Compile Include="Services\ModuleService.cs" />
+    <Compile Include="SiteLog.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SiteSettings.cs">
+      <DependentUpon>NTGEntities.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="NTGEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NTGEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="NTGEntities.edmx.diagram">
+      <DependentUpon>NTGEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NTGEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NTGEntities.edmx</DependentUpon>
+      <LastGenOutput>NTGEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="NTGEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>NTGEntities.edmx</DependentUpon>
+      <LastGenOutput>NTGEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

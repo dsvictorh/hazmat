@@ -1,0 +1,19 @@
+﻿<div class="input-field" ng-hide="hide" ng-class="{'shadow': panel, 'half-field': halfField, 'left': halfField == 'left', 'right': halfField == 'right'}">
+    <label for="{{inputId}}">{{label}}<i class="required" ng-if="required">*</i></label>
+    <div class="slider-controls">
+        <div class="labels">
+            <span class="left">{{prefix}}{{min}}{{suffix}}</span>
+            <span class="right">{{prefix}}{{max}}{{suffix}}</span>
+            <span class="center">{{prefix}}{{model}}{{suffix}}</span>
+        </div>
+        <div class="slider">
+            <i class="fill"></i>
+        </div>
+    </div>
+    <div class="errors" ng-if="errors && errors.length">
+        <p ng-repeat="error in errors">{{error.Text}}</p>
+    </div>
+    <div class="warnings" ng-if="warnings && warnings.length">
+        <p ng-repeat="warning in warnings" ng-if="warning.applies(model)">{{warning.text}}</p>
+    </div>
+</div>

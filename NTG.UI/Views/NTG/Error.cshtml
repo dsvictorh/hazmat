@@ -1,0 +1,19 @@
+﻿<div class="error-page">
+    <div>
+        @if (!string.IsNullOrEmpty(ViewBag.ErrorTopLogo))
+        {
+            <figure class="ntg">
+                <img src="@Url.Content(ViewBag.ErrorTopLogo)" />
+            </figure>
+        }
+        <div>
+            <figure>
+                @if (!string.IsNullOrEmpty(ViewBag.Image))
+                {
+                    <img src="@Url.Content(ViewBag.Image)" alt="ViewBag.Alt" />
+                }
+                <figcaption>@ViewBag.Text</figcaption>
+            </figure>
+        </div>
+    </div>
+</div>

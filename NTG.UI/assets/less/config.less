@@ -1,0 +1,541 @@
+﻿//Fonts
+@font-primary: 'Open Sans', sans-serif;
+@font-awesome: 'Font Awesome';
+@font-face {
+	font-family: @font-awesome;
+	src: url('fonts/fontawesome.eot');
+	src: url('fonts/fontawesome.eot?#iefix') format('embedded-opentype'),
+	url('fonts/fontawesome.svg') format('svg'),
+	url('fonts/fontawesome.woff') format('woff');
+}
+
+//Site Width
+@site-width: 1024px;
+
+//Site Color Palette
+@color-black: #000;
+@color-white: #fff;
+@color-darkblue: #222831;
+@color-darkgreen: #13631e;
+@color-gray: #232323;
+@color-green: #28ad46;
+@color-lightgray: #d9d9d9;
+@color-lightblue: #506fc7;
+
+//Feedback Color Palette
+@color-danger: #cd2b2b;
+@color-warning: #c9a32b;
+@color-success: #3b9e77;
+@color-disabled: #ebebe4;
+@color-error-page-border: #777;
+
+//Media Queries
+//Commented until dotless folks get their shit together
+/*.media-tablet(@styles) {
+	@media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+        @styles();
+	}
+}
+
+.media-mobile(@styles) {
+	@media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+        @styles();
+	}
+}
+
+.media-mobile-small(@styles) {
+	@media screen and (max-device-width: 480px) {
+        @styles();
+	}
+}*/
+
+//Functions
+.clear(@clear){
+    &:after{
+        display: block;
+        clear: @clear;
+        content: '';
+    }
+}
+
+.gradient(@start, @color-from, @color-to){
+
+    background-image: -webkit-linear-gradient(@start, @color-from, @color-to);
+    
+    &when(@start = top){
+        background-image: linear-gradient(to bottom, @color-from, @color-to);
+    }
+
+    &when(@start = bottom){
+        background-image: linear-gradient(to top, @color-from, @color-to);
+    }
+
+    &when(@start = left){
+        background-image: linear-gradient(to right, @color-from, @color-to);
+    }
+
+    &when(@start = right){
+        background-image: linear-gradient(to left, @color-from, @color-to);
+    }
+}
+
+.transition(@value) {
+	-webkit-transition: @value;
+	-moz-transition: @value;
+	transition: @value;
+}
+
+.transform(@value) {
+	-webkit-transform: @value;
+	-moz-transform: @value;
+	transform: @value;
+}
+
+.appearance(@value){
+    -webkit-appearance: @value;
+    -moz-appearance: @value;
+    appearance: @value;
+}
+
+.user-select(@value) {
+	-webkit-user-select: @value;
+	-moz-user-select: @value;
+	-khtml-user-select: @value;
+	-ms-user-select: @value;
+}
+
+.filter(@value){
+    -webkit-filter: @value;
+    filter: @value;
+}
+
+.awesome-icon(@charcode, @position: after, @size: inherit, @color: inherit, @vertical-align: middle, @margin-top: null, @margin-right: null, @margin-bottom: null, @margin-left: null, @margin: null, @display: inline, @textShadow: inline) {
+	& when (@position = after) {
+		&:after {
+			font-family: @font-awesome;
+			font-style: normal;
+			text-shadow: @textShadow;
+			font-size: @size;
+			content: @charcode;
+			vertical-align: @vertical-align;
+			color: @color;
+            display: @display;
+
+			&when not(@margin-top = null) {
+				margin-top: @margin-top;
+			}
+
+			&when not(@margin-right = null) {
+				margin-right: @margin-right;
+			}
+
+			&when not(@margin-bottom = null) {
+				margin-bottom: @margin-bottom;
+			}
+
+			&when not(@margin-left = null) {
+				margin-left: @margin-left;
+			}
+
+			&when not(@margin = null) {
+				margin: @margin;
+			}
+		}
+	}
+
+	&when (@position = before) {
+		&:before {
+			font-family: @font-awesome;
+			font-style: normal;
+			font-size: @size;
+            text-shadow: @textShadow;
+			content: @charcode;
+			vertical-align: @vertical-align;
+			color: @color;
+            display: @display;
+
+			&when not (@margin-top = null) {
+				margin-top: @margin-top;
+			}
+
+			&when not (@margin-right = null) {
+				margin-right: @margin-right;
+			}
+
+			&when not (@margin-bottom = null) {
+				margin-bottom: @margin-bottom;
+			}
+
+			&when not (@margin-left = null) {
+				margin-left: @margin-left;
+			}
+
+			&when not (@margin = null) {
+				margin: @margin;
+			}
+		}
+	}
+}
+
+.animation(@name, @duration: null, @delay: null, @direction: null, @iterationCount: null, @fillMode: null, @timingFunction: null){
+	-moz-animation-name: @name;
+	-webkit-animation-name: @name;
+	animation-name: @name;
+
+	&when not (@duration = null) {
+		-moz-animation-duration: @duration;
+		-webkit-animation-duration: @duration;
+		animation-duration: @duration;
+	}
+
+	&when not (@delay = null) {
+		-moz-animation-delay: @delay;
+		-webkit-animation-delay: @delay;
+		animation-delay: @delay;
+	}
+
+	&when not (@direction = null) {
+		-moz-animation-direction: @direction;
+		-webkit-animation-direction: @direction;
+		animation-direction: @direction;
+	}
+
+	&when not (@iterationCount = null) {
+		-moz-animation-iteration-count: @iterationCount;
+		-webkit-animation-iteration-count: @iterationCount;
+		animation-iteration-count: @iterationCount;
+	}
+
+	&when not (@fillMode = null) {
+		-moz-animation-fill-mode: @fillMode;
+		-webkit-animation-fill-mode: @fillMode;
+		animation-fill-mode: @fillMode;
+	}
+
+	&when not (@timingFunction = null) {
+		-moz-animation-timing-function: @timingFunction;
+		-webkit-animation-timing-function: @timingFunction;
+		animation-timing-function: @timingFunction;
+	}
+}
+
+//Visual Modifiers
+.hide-small{
+    @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+        display: none;
+	}
+}
+
+.shadow{
+    box-shadow: 5px 5px 14px -5px rgba(0, 0, 0, 0.6);
+}
+
+.text-shadow{
+    text-shadow: 2px 2px 10px @color-black;
+
+    .light &{
+        text-shadow: none;
+    }
+}
+
+.button, button{
+    background: @color-green;
+    color: @color-white;
+    border: none;
+    cursor: pointer;
+    @transition: background 0.2s linear, transform 0.2s linear;
+    .transition(@transition);
+
+    &.loading{
+        background: @color-gray;
+        opacity: 0.6;
+        color: @color-white;
+        cursor: not-allowed;
+        .transition(none);
+
+        &:hover{
+            background: @color-gray;
+            .transform(none);
+        }
+    }
+
+    &:hover{
+        background: @color-lightblue;
+        color: @color-white;
+        .transform(scale(0.98));
+    }
+}
+
+.label{
+    font-size: 1rem;
+    margin-bottom: 10px;
+    padding: 5px 12px;
+    color: white;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: 600;
+
+    &.info{
+        background: @color-lightblue;
+    }
+
+    &.success{
+        background: @color-success;
+    }
+
+    &.warning{
+        background: @color-warning;
+    }
+
+    &.danger{
+        background: @color-danger;
+    }
+}
+
+.loading(@color, @icon-size, @position, @background: none){
+    position: relative; 
+
+    .loading-icon{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: @position;
+        background: @background;
+        color: @color;
+        .awesome-icon('\f110', @size: @icon-size, @display: inline-block);
+
+        &:after{
+            .animation(
+                @name: load-spin,
+                @duration: 1.1s,
+                @iterationCount: infinite,
+                @timingFunction: steps(8)
+            );
+        }
+    }
+}
+
+.deleted{
+    .delete-corner{
+        color: @color-success;
+        .awesome-icon('\f01e', @textShadow: 0px 0px 3px fade(@color-black, 50%));
+    }
+}
+
+.delete-corner{
+    .awesome-icon('\f00d', @textShadow: 0px 0px 3px fade(@color-black, 50%));
+    color: @color-danger;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: 20px;
+    right: 20px;
+    font-size: 1.5rem;
+
+    &.static{
+        position: static;
+    }
+
+    &.small{
+        top: 2px;
+        right: 5px;
+    }    
+
+    &.disabled{
+        color: @color-disabled;
+        cursor: default;
+    }
+
+    @media screen and (max-width: 768px), screen and (max-device-width: 768px){
+        top: 10px;
+        right: 10px;
+    }
+
+    &:hover{
+        opacity: 0.8;
+        .transition(opacity 0.2s linear);
+    }
+}
+
+//Site Global Messages
+.floating-messages{
+    position: fixed;
+    z-index: 100;
+    width: 30%;
+    left: 35%;
+    top: 10px;
+
+    @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+         width: 60%;
+         left: 20%;
+	}
+
+    @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+        width: 80%;
+        left: 10%;
+	}
+
+    p{
+        margin: -10px 0 5px;
+        border-radius: 5px;
+        padding: 15px;
+        text-align: center;
+        font-size: 1.3rem;
+        letter-spacing: 0.5px;
+        color: @color-white;
+        opacity: 0;
+        @transition: opacity 0.3s linear, margin 0.3s linear;
+        .transition(@transition);
+
+        @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+            font-size: 1.5rem;
+	    }
+
+        &.show{
+            opacity: 1;
+            margin-top: 0px;
+        }
+
+        &.success{
+            background: fade(@color-success, 80%);
+        }
+
+        &.warning{
+            background: fade(@color-warning, 80%);
+        }
+
+        &.error{
+            background: fade(@color-danger, 80%);
+        }
+    }
+}
+
+//Error pages
+.error-page{
+    padding: 60px;
+    box-sizing: border-box;
+    min-width: 956px;
+    min-height: 517px;
+
+    @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+        min-width: 0;
+        min-height: 0;
+	}
+
+    @media screen  and (max-device-width: 768px) {
+        padding: 5%;
+        border-width: 6px;
+	}
+
+    > div{
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 60px;
+        position: relative;
+        border: solid 6px @color-error-page-border;
+
+        @media screen  and (max-device-width: 768px) {
+            padding: 2%;
+            border-width: 4px;
+	    }
+
+        .ntg{
+            width: 100%;
+            position: absolute;
+            top: -25px;
+            left: 0;
+            text-align: center;
+
+            @media screen  and (max-device-width: 768px) {
+                top: -20px;
+	        }
+
+            img{
+                display: inline-block;
+                width: 75px;
+                padding: 10px;
+                background: @color-lightgray;
+
+                @media screen  and (max-device-width: 768px) {
+                    width: 50px;
+	            }
+            }
+        }
+
+        > div{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            overflow: hidden;
+
+            > figure{
+                width: 60%;
+                margin: 0 auto;
+                text-align: center;
+
+                @media screen and (max-device-width: 480px) and (orientation: portrait) {
+                    width: 80%;
+	            }
+
+                img{
+                    width: 50%;
+
+                    @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                        width: 80%;
+	                }
+
+                    @media screen and (max-device-width: 480px) and (orientation: portrait) {
+                        width: 100%;
+	                }
+                }
+
+                figcaption{
+                    font-size: 1.6rem;
+                    padding: 1%;
+
+                    @media screen and (max-device-width: 480px) and (orientation: portrait) {
+                        padding: 10px 5px;
+	                }
+                }
+            }
+        }
+    }
+}
+
+//Keyframes
+@-moz-keyframes load-spin {
+	from{
+        .transform(rotate(0deg));
+	}
+
+    to{
+        .transform(rotate(359deg));
+    }
+}
+
+@-webkit-keyframes load-spin {
+	from{
+        .transform(rotate(0deg));
+	}
+
+    to{
+        .transform(rotate(359deg));
+    }
+}
+
+@keyframes load-spin {
+	from{
+        .transform(rotate(0deg));
+	}
+
+    to{
+        .transform(rotate(359deg));
+    }
+}

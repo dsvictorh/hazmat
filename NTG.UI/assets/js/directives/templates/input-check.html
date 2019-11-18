@@ -1,0 +1,7 @@
+﻿<div class="input-field" ng-hide="hide" ng-class="{'shadow': panel, 'half-field': halfField, 'left': halfField == 'left', 'right': halfField == 'right'}">
+    <input type="checkbox" id="{{inputId}}" name="{{inputId}}" ng-model="model" />
+    <label for="{{inputId}}" title="{{tooltip}}"><i class="check"></i> {{label}}</label>
+    <div class="warnings" ng-if="warnings && warnings.length">
+        <p ng-repeat="warning in warnings" ng-if="warning.applies(model)">{{warning.text}}</p>
+    </div>
+</div>

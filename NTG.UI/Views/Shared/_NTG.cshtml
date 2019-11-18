@@ -1,0 +1,286 @@
+﻿@{ 
+    var siteSettings = NTG.UI.Global.GlobalVariables.SiteSettings;
+}
+<!DOCTYPE html>
+<html ng-app="ntg">
+    <head prefix="og: http://ogp.me/ns#">
+        <title>@siteSettings.MetaSiteTitle - @ViewBag.Title</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" /> 
+        @if (!string.IsNullOrEmpty(siteSettings.MetaSiteDescription))
+        {
+            <meta name="description" content="@siteSettings.MetaSiteDescription" />
+        }
+
+        @if (!string.IsNullOrEmpty(siteSettings.MetaOgLocale))
+        {
+            <meta property="og:locale" content="@siteSettings.MetaOgLocale" />
+        }
+
+        @if (!string.IsNullOrEmpty(siteSettings.MetaOgTitle))
+        {
+            <meta property="og:title" content="@siteSettings.MetaOgTitle" />
+        }
+        
+        @if (!string.IsNullOrEmpty(siteSettings.MetaOgDescription))
+        {
+            <meta property="og:description" content="@siteSettings.MetaOgDescription" />
+        }
+        
+        @if (!string.IsNullOrEmpty(siteSettings.MetaOgImageUrl))
+        {
+            <meta property="og:image" content="@siteSettings.MetaOgImageUrl" />
+        }
+        
+        @if (!string.IsNullOrEmpty(siteSettings.MetaOgImageType))
+        {
+            <meta property="og:image:type" content="@siteSettings.MetaOgImageType" />
+        }
+        
+        @if (siteSettings.MetaOgImageWidth != null)
+        {
+            <meta property="og:image:width" content="@siteSettings.MetaOgImageWidth" />
+        }
+        
+        @if (siteSettings.MetaOgImageHeight != null)
+        {
+            <meta property="og:image:height" content="@siteSettings.MetaOgImageHeight" />
+        }
+        
+        @if (!string.IsNullOrEmpty(siteSettings.MetaOgUrl))
+        {
+            <meta property="og:url" content="@siteSettings.MetaOgUrl" />
+        }
+        
+        @if (!string.IsNullOrEmpty(siteSettings.MetaOgSiteName))
+        {
+            <meta property="og:site_name" content="@siteSettings.MetaOgSiteName">
+        }
+        
+        @if (!string.IsNullOrEmpty(siteSettings.MetaOgType))
+        {
+            <meta property="og:type" content="@siteSettings.MetaOgType" />
+        }
+        
+        @if (!string.IsNullOrEmpty(siteSettings.MetaTwitterCard))
+        {
+            <meta name="twitter:card" content="@siteSettings.MetaTwitterCard" />
+        }
+        
+        @if (!string.IsNullOrEmpty(siteSettings.MetaTwitterSite))
+        {
+            <meta name="twitter:site" content="@siteSettings.MetaTwitterSite" />
+        }
+
+        @if (!string.IsNullOrEmpty(siteSettings.MetaTwitterTitle))
+        {
+            <meta name="twitter:title" content="@siteSettings.MetaTwitterTitle" />
+        }
+
+        @if (!string.IsNullOrEmpty(siteSettings.MetaTwitterDescription))
+        {
+            <meta name="twitter:description" content="@siteSettings.MetaTwitterDescription" />
+        }
+        
+        @if (!string.IsNullOrEmpty(siteSettings.MetaTwitterImageUrl))
+        {
+            <meta name="twitter:image" content="@siteSettings.MetaTwitterImageUrl" />
+        }
+
+        <meta name="twitter:creator" content="@("@")dsvictorh" />
+        <link rel="author" href="http://www.victorh.me" />
+        @if (!string.IsNullOrEmpty(siteSettings.MetaFaviconImageUrl))
+        {
+            <link rel="icon" href="@Url.Content(siteSettings.MetaFaviconImageUrl)" />
+        }
+        @Styles.Render("~/bundles/less/ntg")
+    </head>
+    <body ng-controller="LayoutController" ng-class="{'locked': menuActive, 'modal': modalTemplate}" class="@ViewBag.BodyClass" ng-click="toggleMenu($event, false)">
+        <div class="lockscreen" ng-click="closeModal()">
+            @if (!string.IsNullOrEmpty(siteSettings.LoadingImageUrl))
+            {
+                <div class="loading-screen">
+                    <div class="logo">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <img src="@Url.Content(siteSettings.LoadingImageUrl)" />
+                    </div>
+                </div>
+            }
+
+            <div class="modal-body shadow" ng-class="modalSize" ng-if="modalTemplate" ng-click="$event.stopPropagation();">
+                <i class="delete-corner small" title="Close" ng-click="closeModal();"></i>
+                <div ng-include="modalTemplate" onload="model = modalModel"></div>
+            </div>
+        </div>
+        @if (!string.IsNullOrEmpty(ViewBag.HeroImage))
+        {
+            <figure class="hero-background">
+                @if (!string.IsNullOrEmpty(ViewBag.MobileHeroImage))
+                {
+                    <img class="desktop" src="@Url.Content(ViewBag.HeroImage)" />
+                    <img class="mobile" src="@Url.Content(ViewBag.MobileHeroImage)" />
+                }
+                else
+                {
+                    <img src="@Url.Content(ViewBag.HeroImage)" />
+                }
+      </figure>
+        }
+
+        @if (ViewBag.HideMenu == null || !ViewBag.HideMenu)
+        {
+            <header>
+                <nav class="menu" focusable-objects>
+                    @if (!string.IsNullOrEmpty(siteSettings.HeaderHomeImageUrl))
+                    {
+                        <a href="/" class="logo mobile" focus-object>
+                            <img src="@Url.Content(siteSettings.HeaderHomeImageUrl)" alt="Home" />
+                        </a>
+                    }
+                    
+                    <ul class="shadow" ng-class="{'active': menuActive}">
+                        @if (!string.IsNullOrEmpty(siteSettings.HeaderHomeImageUrl))
+                        {
+                            <li>
+                                <a href="/" class="logo" focus-object>
+                                    <img src="@Url.Content(siteSettings.HeaderHomeImageUrl)" alt="Home" />
+                                </a>
+                            </li>
+                        }
+                        
+                        @foreach (var page in NTG.Logic.Models.Page.Query.Where(p => p.Position != 1 && p.InMenu).OrderBy(p => p.Position).Select(p => p.Name))
+                        {
+                            var pageClass = ViewContext.RouteData.GetRequiredString("controller").Equals("Home")
+                                && ViewContext.RouteData.GetRequiredString("action").Equals("GetPage")
+                                && Request.Url.AbsoluteUri.Contains(page.Replace(" ", "-").ToLower())
+                                ? "active" : string.Empty;
+                            <li>
+                                <a class="@pageClass" href="@Url.Action("GetPage", "Home", new { pageName = page.Replace(" ", "-").ToLower() })" focus-object>@Html.Raw(page)</a>
+                            </li>
+                        }
+
+                        @if (!string.IsNullOrEmpty(siteSettings.BlogUrl))
+                        {
+                            <li>
+                                <a href="@siteSettings.BlogUrl" focus-object>Blog</a>
+                            </li>
+                        }
+
+                        @if (!string.IsNullOrEmpty(siteSettings.ForumUrl))
+                        {
+                            <li>
+                                <a href="@siteSettings.ForumUrl" focus-object>Forum</a>
+                            </li>
+                        }
+
+                        @if (!string.IsNullOrEmpty(siteSettings.ShopUrl))
+                        {
+                            <li>
+                                <a href="@siteSettings.ShopUrl" focus-object>Shop</a>
+                            </li>
+                        }
+                        
+                        <!--<li class="right-menu">
+                            <a href="javascript:void(0)" class="signup">Sign Up</a>
+                        </li>
+                        <li class="right-menu">
+                            <a href="javascript:void(0)" class="login">Log In</a>
+                        </li>-->
+                    </ul>
+                    <div class="mobile-toggle">
+                        <a href="javascript:void(0)" ng-click="toggleMenu($event)">
+                            <i></i>
+                            <i></i>
+                            <i></i>
+                        </a>
+                    </div>
+                </nav>
+            </header>
+        }
+        <main>
+            @RenderBody()
+        </main>
+        @if (ViewBag.HideFooter == null || !ViewBag.HideFooter)
+        {
+            <footer class="site-footer  @Html.Raw(ViewBag.FooterTheme ? "light" : string.Empty)" focusable-objects>
+                <div>
+                    @if (!string.IsNullOrEmpty(siteSettings.FooterHomeImageUrlLight) && !string.IsNullOrEmpty(siteSettings.FooterHomeImageUrlDark))
+                    {
+                        <figure class="logo">
+                            <a href="/" focus-object>
+                                <img src="@Url.Content(ViewBag.FooterTheme ? siteSettings.FooterHomeImageUrlDark : siteSettings.FooterHomeImageUrlLight)" alt="Home" />
+                            </a>
+                        </figure>
+                    }
+                    
+                    <section class="social-links">
+                        @if (!string.IsNullOrEmpty(siteSettings.FacebookUrl))
+                        {
+                            <a href="@siteSettings.FacebookUrl" class="facebook"></a>
+                        }
+
+                        @if (!string.IsNullOrEmpty(siteSettings.TwitterUrl))
+                        {
+                            <a href="@siteSettings.TwitterUrl" class="twitter"></a>
+                        }
+
+                        @if (!string.IsNullOrEmpty(siteSettings.RedditUrl))
+                        {
+                            <a href="@siteSettings.RedditUrl" class="reddit"></a>
+                        }
+
+                        @if (!string.IsNullOrEmpty(siteSettings.YouTubeUrl))
+                        {
+                            <a href="@siteSettings.YouTubeUrl" class="youtube"></a>
+                        }
+
+                        @if (!string.IsNullOrEmpty(siteSettings.TwitchUrl))
+                        {
+                            <a href="@siteSettings.TwitchUrl" class="twitch"></a>
+                        }
+                    </section>
+                    <nav class="links-footer">
+                        <ul>
+                            @foreach (var page in NTG.Logic.Models.Page.Query.Where(p => p.Position != 1 && p.InBottomMenu).OrderBy(p => p.Position).Select(p => p.Name))
+                            {
+                                <li>
+                                    <a href="@Url.Action("GetPage", "Home", new { pageName = page.Replace(" ", "-").ToLower() })" focus-object>@Html.Raw(page)</a>
+                                </li>
+                            }
+
+                            @if (!string.IsNullOrEmpty(siteSettings.BlogUrl))
+                            {
+                                <li>
+                                    <a href="@siteSettings.BlogUrl" focus-object>Blog</a>
+                                </li>
+                            }
+
+                            @if (!string.IsNullOrEmpty(siteSettings.ForumUrl))
+                            {
+                                <li>
+                                    <a href="@siteSettings.ForumUrl" focus-object>Forum</a>
+                                </li>
+                            }
+
+                            @if (!string.IsNullOrEmpty(siteSettings.ShopUrl))
+                            {
+                                <li>
+                                    <a href="@siteSettings.ShopUrl" focus-object>Shop</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                    <small class="copyright">&copy; Copyright {{currentYear}}, Non-Toxic Gaming</small>
+                </div>
+            </footer>
+        }
+        <section class="floating-messages">
+            <p ng-repeat="message in messages.global" class="{{message.MessageType | lowercase}}" ng-class="{show: !message.remove}">{{message.Text}}</p>
+        </section> 
+        @Scripts.Render("~/bundles/js/ntg")
+        @RenderSection("Scripts", false)
+    </body>
+</html>

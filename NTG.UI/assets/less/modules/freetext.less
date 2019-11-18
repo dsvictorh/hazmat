@@ -1,0 +1,44 @@
+﻿.freetext{
+    ul{
+        list-style: disc;
+    }
+
+    ol {
+        list-style: decimal;
+    }
+
+    h1, h2{
+        text-align: center;
+    }
+
+    //ngWysiwig bug hack
+    span{
+        font-size: inherit !important;
+    }
+
+    ul, ol{
+        margin-bottom: 10px;
+        padding-left: 50px;
+        text-align: left;
+
+        &:last-child{
+            margin-bottom: 0;
+        }
+
+        li{
+            font-size: 1.5rem;
+            letter-spacing: 1px;
+            font-weight: 300;
+            margin-bottom: 10px;
+            line-height: 1.2;
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+
+            @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                font-size: 1.8rem;
+	        }
+        }
+    }
+}

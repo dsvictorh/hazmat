@@ -1,0 +1,1305 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Password" Type="char" MaxLength="64" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Active" Type="bit" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="Type" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StackTrace" Type="nvarchar(max)" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="IPAddress" Type="nvarchar(max)" />
+          <Property Name="Browser" Type="nvarchar(max)" />
+          <Property Name="Object" Type="nvarchar(max)" />
+          <Property Name="Function" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Line" Type="int" />
+          <Property Name="HResult" Type="nvarchar(max)" />
+          <Property Name="InnerMessage" Type="nvarchar(max)" />
+          <Property Name="Important" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LootBoxClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="Prize" Type="nvarchar(max)" />
+          <Property Name="Redeemed" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleBoxes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="text" />
+        </EntityType>
+        <EntityType Name="ModuleBoxesBox">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="Color" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="95" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="ModuleBoxesId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleCallout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GreenTitlePrefix" Type="nvarchar" MaxLength="20" />
+          <Property Name="Subtitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="ButtonText" Type="nvarchar" MaxLength="20" />
+          <Property Name="ButtonLink" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ModuleFreeText">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleGallery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleGalleryImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="ModuleGalleryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleGalleryImageLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="ModuleGalleryImageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleProfileCards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleProfileCardsCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="FacebookUrl" Type="nvarchar(max)" />
+          <Property Name="TwitterUrl" Type="nvarchar(max)" />
+          <Property Name="TwitchUrl" Type="nvarchar(max)" />
+          <Property Name="InstagramUrl" Type="nvarchar(max)" />
+          <Property Name="YouTubeUrl" Type="nvarchar(max)" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="ModuleProfileCardsId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleProfileCardsCardLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="ModuleProfileCardsCardId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModulePromo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Text" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ButtonText" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="ButtonLink" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ImageRight" Type="bit" Nullable="false" />
+          <Property Name="TitleTop" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleSimpleCards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleSimpleCardsCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Image" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Subtitle" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="ModuleSimpleCardsId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="HeroImage" Type="nvarchar(max)" />
+          <Property Name="MobileHeroImage" Type="nvarchar(max)" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="InMenu" Type="bit" Nullable="false" />
+          <Property Name="InBottomMenu" Type="bit" Nullable="false" />
+          <Property Name="Visible" Type="bit" Nullable="false" />
+          <Property Name="AdminLocked" Type="bit" Nullable="false" />
+          <Property Name="UploadFolder" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PageModule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModuleTypeId" Type="int" Nullable="false" />
+          <Property Name="PageId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="Position" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="BlueTitle" Type="bit" Nullable="false" />
+          <Property Name="Theme" Type="bit" Nullable="false" />
+          <Property Name="TransparentBackground" Type="bit" Nullable="false" />
+          <Property Name="LootBox" Type="bit" Nullable="false" />
+          <Property Name="LootBoxTop" Type="int" Nullable="false" />
+          <Property Name="LootBoxLeft" Type="int" Nullable="false" />
+          <Property Name="State" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SecurityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="Action" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IPAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Browser" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="UserEmail" Type="nvarchar(max)" />
+          <Property Name="UserType" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SiteLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="datetimeoffset" Precision="7" Nullable="false" />
+          <Property Name="IPAddress" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Page" Type="nvarchar(max)" />
+          <Property Name="Module" Type="nvarchar(max)" />
+          <Property Name="Action" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Important" Type="bit" Nullable="false" />
+          <Property Name="AdminId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiteSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MetaSiteTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="MetaSiteDescription" Type="nvarchar(max)" />
+          <Property Name="MetaFaviconImageUrl" Type="nvarchar(max)" />
+          <Property Name="MetaOgLocale" Type="nvarchar" MaxLength="10" />
+          <Property Name="MetaOgTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="MetaOgDescription" Type="nvarchar(max)" />
+          <Property Name="MetaOgImageUrl" Type="nvarchar(max)" />
+          <Property Name="MetaOgImageType" Type="nvarchar" MaxLength="20" />
+          <Property Name="MetaOgImageWidth" Type="int" />
+          <Property Name="MetaOgImageHeight" Type="int" />
+          <Property Name="MetaOgUrl" Type="nvarchar(max)" />
+          <Property Name="MetaOgSiteName" Type="nvarchar" MaxLength="50" />
+          <Property Name="MetaOgType" Type="nvarchar" MaxLength="20" />
+          <Property Name="MetaTwitterCard" Type="nvarchar" MaxLength="20" />
+          <Property Name="MetaTwitterSite" Type="nvarchar" MaxLength="50" />
+          <Property Name="MetaTwitterTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="MetaTwitterDescription" Type="nvarchar(max)" />
+          <Property Name="MetaTwitterImageUrl" Type="nvarchar(max)" />
+          <Property Name="HeaderHomeImageUrl" Type="nvarchar(max)" />
+          <Property Name="FooterHomeImageUrlLight" Type="nvarchar(max)" />
+          <Property Name="FooterHomeImageUrlDark" Type="nvarchar(max)" />
+          <Property Name="LoadingImageUrl" Type="nvarchar(max)" />
+          <Property Name="ErrorImage401Url" Type="nvarchar(max)" />
+          <Property Name="ErrorImage403Url" Type="nvarchar(max)" />
+          <Property Name="ErrorImage404Url" Type="nvarchar(max)" />
+          <Property Name="ErrorImage500Url" Type="nvarchar(max)" />
+          <Property Name="ErrorImage503Url" Type="nvarchar(max)" />
+          <Property Name="ErrorImageIconTopUrl" Type="nvarchar(max)" />
+          <Property Name="LootBoxImageUrl" Type="nvarchar(max)" />
+          <Property Name="LootBoxPopupTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="LootBoxPopupText" Type="nvarchar(max)" />
+          <Property Name="BlogUrl" Type="nvarchar(max)" />
+          <Property Name="ForumUrl" Type="nvarchar(max)" />
+          <Property Name="ShopUrl" Type="nvarchar(max)" />
+          <Property Name="FacebookUrl" Type="nvarchar(max)" />
+          <Property Name="TwitterUrl" Type="nvarchar(max)" />
+          <Property Name="RedditUrl" Type="nvarchar(max)" />
+          <Property Name="YouTubeUrl" Type="nvarchar(max)" />
+          <Property Name="TwitchUrl" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Admin_Role_RoleId">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleBoxesBox_ModuleBoxes_ModuleBoxesId">
+          <End Role="ModuleBoxes" Type="Self.ModuleBoxes" Multiplicity="1" />
+          <End Role="ModuleBoxesBox" Type="Self.ModuleBoxesBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleBoxes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleBoxesBox">
+              <PropertyRef Name="ModuleBoxesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleGalleryImage_ModuleGallery_ModuleGalleryId">
+          <End Role="ModuleGallery" Type="Self.ModuleGallery" Multiplicity="1" />
+          <End Role="ModuleGalleryImage" Type="Self.ModuleGalleryImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleGallery">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleGalleryImage">
+              <PropertyRef Name="ModuleGalleryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleGalleryImageLink_ModuleGalleryImage_ModuleGalleryImageId">
+          <End Role="ModuleGalleryImage" Type="Self.ModuleGalleryImage" Multiplicity="1" />
+          <End Role="ModuleGalleryImageLink" Type="Self.ModuleGalleryImageLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleGalleryImage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleGalleryImageLink">
+              <PropertyRef Name="ModuleGalleryImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleProfileCardsCard_ModuleProfileCards_ModuleProfileCardsId">
+          <End Role="ModuleProfileCards" Type="Self.ModuleProfileCards" Multiplicity="1" />
+          <End Role="ModuleProfileCardsCard" Type="Self.ModuleProfileCardsCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleProfileCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleProfileCardsCard">
+              <PropertyRef Name="ModuleProfileCardsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleProfileCardsCardLink_ModuleProfileCardsCard_ModuleProfileCardsCardId">
+          <End Role="ModuleProfileCardsCard" Type="Self.ModuleProfileCardsCard" Multiplicity="1" />
+          <End Role="ModuleProfileCardsCardLink" Type="Self.ModuleProfileCardsCardLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleProfileCardsCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleProfileCardsCardLink">
+              <PropertyRef Name="ModuleProfileCardsCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleSimpleCardsCard_ModuleSimpleCards_ModuleSimpleCardsId">
+          <End Role="ModuleSimpleCards" Type="Self.ModuleSimpleCards" Multiplicity="1" />
+          <End Role="ModuleSimpleCardsCard" Type="Self.ModuleSimpleCardsCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleSimpleCards">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleSimpleCardsCard">
+              <PropertyRef Name="ModuleSimpleCardsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PageModule_ModuleType_ModuleTypeId">
+          <End Role="ModuleType" Type="Self.ModuleType" Multiplicity="1" />
+          <End Role="PageModule" Type="Self.PageModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PageModule">
+              <PropertyRef Name="ModuleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PageModule_Page_PageId">
+          <End Role="Page" Type="Self.Page" Multiplicity="1" />
+          <End Role="PageModule" Type="Self.PageModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PageModule">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SiteLog_Admin_AdminId">
+          <End Role="Admin" Type="Self.Admin" Multiplicity="1" />
+          <End Role="SiteLog" Type="Self.SiteLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SiteLog">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ErrorLog" EntityType="Self.ErrorLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LootBoxClaim" EntityType="Self.LootBoxClaim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleBoxes" EntityType="Self.ModuleBoxes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleBoxesBox" EntityType="Self.ModuleBoxesBox" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleCallout" EntityType="Self.ModuleCallout" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleFreeText" EntityType="Self.ModuleFreeText" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleGallery" EntityType="Self.ModuleGallery" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleGalleryImage" EntityType="Self.ModuleGalleryImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleGalleryImageLink" EntityType="Self.ModuleGalleryImageLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleProfileCards" EntityType="Self.ModuleProfileCards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleProfileCardsCard" EntityType="Self.ModuleProfileCardsCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleProfileCardsCardLink" EntityType="Self.ModuleProfileCardsCardLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModulePromo" EntityType="Self.ModulePromo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleSimpleCards" EntityType="Self.ModuleSimpleCards" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleSimpleCardsCard" EntityType="Self.ModuleSimpleCardsCard" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModuleType" EntityType="Self.ModuleType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Page" EntityType="Self.Page" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PageModule" EntityType="Self.PageModule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SecurityLog" EntityType="Self.SecurityLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteLog" EntityType="Self.SiteLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SiteSettings" EntityType="Self.SiteSettings" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Admin_Role_RoleId" Association="Self.FK_Admin_Role_RoleId">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleBoxesBox_ModuleBoxes_ModuleBoxesId" Association="Self.FK_ModuleBoxesBox_ModuleBoxes_ModuleBoxesId">
+            <End Role="ModuleBoxes" EntitySet="ModuleBoxes" />
+            <End Role="ModuleBoxesBox" EntitySet="ModuleBoxesBox" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleGalleryImage_ModuleGallery_ModuleGalleryId" Association="Self.FK_ModuleGalleryImage_ModuleGallery_ModuleGalleryId">
+            <End Role="ModuleGallery" EntitySet="ModuleGallery" />
+            <End Role="ModuleGalleryImage" EntitySet="ModuleGalleryImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleGalleryImageLink_ModuleGalleryImage_ModuleGalleryImageId" Association="Self.FK_ModuleGalleryImageLink_ModuleGalleryImage_ModuleGalleryImageId">
+            <End Role="ModuleGalleryImage" EntitySet="ModuleGalleryImage" />
+            <End Role="ModuleGalleryImageLink" EntitySet="ModuleGalleryImageLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleProfileCardsCard_ModuleProfileCards_ModuleProfileCardsId" Association="Self.FK_ModuleProfileCardsCard_ModuleProfileCards_ModuleProfileCardsId">
+            <End Role="ModuleProfileCards" EntitySet="ModuleProfileCards" />
+            <End Role="ModuleProfileCardsCard" EntitySet="ModuleProfileCardsCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleProfileCardsCardLink_ModuleProfileCardsCard_ModuleProfileCardsCardId" Association="Self.FK_ModuleProfileCardsCardLink_ModuleProfileCardsCard_ModuleProfileCardsCardId">
+            <End Role="ModuleProfileCardsCard" EntitySet="ModuleProfileCardsCard" />
+            <End Role="ModuleProfileCardsCardLink" EntitySet="ModuleProfileCardsCardLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleSimpleCardsCard_ModuleSimpleCards_ModuleSimpleCardsId" Association="Self.FK_ModuleSimpleCardsCard_ModuleSimpleCards_ModuleSimpleCardsId">
+            <End Role="ModuleSimpleCards" EntitySet="ModuleSimpleCards" />
+            <End Role="ModuleSimpleCardsCard" EntitySet="ModuleSimpleCardsCard" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PageModule_ModuleType_ModuleTypeId" Association="Self.FK_PageModule_ModuleType_ModuleTypeId">
+            <End Role="ModuleType" EntitySet="ModuleType" />
+            <End Role="PageModule" EntitySet="PageModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PageModule_Page_PageId" Association="Self.FK_PageModule_Page_PageId">
+            <End Role="Page" EntitySet="Page" />
+            <End Role="PageModule" EntitySet="PageModule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SiteLog_Admin_AdminId" Association="Self.FK_SiteLog_Admin_AdminId">
+            <End Role="Admin" EntitySet="Admin" />
+            <End Role="SiteLog" EntitySet="SiteLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NTGDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ModuleBoxes" EntityType="Model.ModuleBoxes" />
+          <EntitySet Name="ModuleBoxesBox" EntityType="Model.ModuleBoxesBox" />
+          <EntitySet Name="ModuleType" EntityType="Model.ModuleType" />
+          <EntitySet Name="Page" EntityType="Model.Page" />
+          <AssociationSet Name="FK_ModuleBoxesBox_ModuleBoxes_ModuleBoxesId" Association="Model.FK_ModuleBoxesBox_ModuleBoxes_ModuleBoxesId">
+            <End Role="ModuleBoxes" EntitySet="ModuleBoxes" />
+            <End Role="ModuleBoxesBox" EntitySet="ModuleBoxesBox" />
+          </AssociationSet>
+          <EntitySet Name="ModuleCallouts" EntityType="Model.ModuleCallout" />
+          <EntitySet Name="PageModules" EntityType="Model.PageModule" />
+          <AssociationSet Name="FK_PageModule_ModuleType_ModuleTypeId" Association="Model.FK_PageModule_ModuleType_ModuleTypeId">
+            <End Role="ModuleType" EntitySet="ModuleType" />
+            <End Role="PageModule" EntitySet="PageModules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PageModule_Page_PageId" Association="Model.FK_PageModule_Page_PageId">
+            <End Role="Page" EntitySet="Page" />
+            <End Role="PageModule" EntitySet="PageModules" />
+          </AssociationSet>
+          <EntitySet Name="ModuleProfileCards" EntityType="Model.ModuleProfileCards" />
+          <EntitySet Name="ModuleProfileCardsCards" EntityType="Model.ModuleProfileCardsCard" />
+          <EntitySet Name="ModuleProfileCardsCardLinks" EntityType="Model.ModuleProfileCardsCardLink" />
+          <AssociationSet Name="FK_ModuleProfileCardsCard_ModuleProfileCards_ModuleProfileCardsId" Association="Model.FK_ModuleProfileCardsCard_ModuleProfileCards_ModuleProfileCardsId">
+            <End Role="ModuleProfileCard" EntitySet="ModuleProfileCards" />
+            <End Role="ModuleProfileCardsCard" EntitySet="ModuleProfileCardsCards" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleProfileCardsCardLink_ModuleProfileCardsCard_ModuleProfileCardsCardId" Association="Model.FK_ModuleProfileCardsCardLink_ModuleProfileCardsCard_ModuleProfileCardsCardId">
+            <End Role="ModuleProfileCardsCard" EntitySet="ModuleProfileCardsCards" />
+            <End Role="ModuleProfileCardsCardLink" EntitySet="ModuleProfileCardsCardLinks" />
+          </AssociationSet>
+          <EntitySet Name="ModuleSimpleCards" EntityType="Model.ModuleSimpleCards" />
+          <EntitySet Name="ModuleSimpleCardsCards" EntityType="Model.ModuleSimpleCardsCard" />
+          <AssociationSet Name="FK_ModuleSimpleCardsCard_ModuleSimpleCards_ModuleSimpleCardsId" Association="Model.FK_ModuleSimpleCardsCard_ModuleSimpleCards_ModuleSimpleCardsId">
+            <End Role="ModuleSimpleCard" EntitySet="ModuleSimpleCards" />
+            <End Role="ModuleSimpleCardsCard" EntitySet="ModuleSimpleCardsCards" />
+          </AssociationSet>
+          <EntitySet Name="ModuleFreeTexts" EntityType="Model.ModuleFreeText" />
+          <EntitySet Name="Roles" EntityType="Model.Role" />
+          <EntitySet Name="Admins" EntityType="Model.Admin" />
+          <AssociationSet Name="FK_Admin_Role_RoleId" Association="Model.FK_Admin_Role_RoleId">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <EntitySet Name="ErrorLogs" EntityType="Model.ErrorLog" />
+          <EntitySet Name="SecurityLogs" EntityType="Model.SecurityLog" />
+          <EntitySet Name="SiteLogs" EntityType="Model.SiteLog" />
+          <AssociationSet Name="FK_SiteLog_Admin_AdminId" Association="Model.FK_SiteLog_Admin_AdminId">
+            <End Role="Admin" EntitySet="Admins" />
+            <End Role="SiteLog" EntitySet="SiteLogs" />
+          </AssociationSet>
+          <EntitySet Name="ModuleGalleries" EntityType="Model.ModuleGallery" />
+          <EntitySet Name="ModuleGalleryImages" EntityType="Model.ModuleGalleryImage" />
+          <EntitySet Name="ModuleGalleryImageLinks" EntityType="Model.ModuleGalleryImageLink" />
+          <AssociationSet Name="FK_ModuleGalleryImage_ModuleGallery_ModuleGalleryId" Association="Model.FK_ModuleGalleryImage_ModuleGallery_ModuleGalleryId">
+            <End Role="ModuleGallery" EntitySet="ModuleGalleries" />
+            <End Role="ModuleGalleryImage" EntitySet="ModuleGalleryImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModuleGalleryImageLink_ModuleGalleryImage_ModuleGalleryImageId" Association="Model.FK_ModuleGalleryImageLink_ModuleGalleryImage_ModuleGalleryImageId">
+            <End Role="ModuleGalleryImage" EntitySet="ModuleGalleryImages" />
+            <End Role="ModuleGalleryImageLink" EntitySet="ModuleGalleryImageLinks" />
+          </AssociationSet>
+          <EntitySet Name="ModulePromoes" EntityType="Model.ModulePromo" />
+          <EntitySet Name="LootBoxClaims" EntityType="Model.LootBoxClaim" />
+          <EntitySet Name="SiteSettings1" EntityType="Model.SiteSettings" />
+          </EntityContainer>
+        <EntityType Name="ModuleBoxes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ModuleBoxesBox" Relationship="Model.FK_ModuleBoxesBox_ModuleBoxes_ModuleBoxesId" FromRole="ModuleBoxes" ToRole="ModuleBoxesBox" />
+        </EntityType>
+        <EntityType Name="ModuleBoxesBox">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="true" />
+          <Property Name="Color" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="95" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="ModuleBoxesId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModuleBoxes" Relationship="Model.FK_ModuleBoxesBox_ModuleBoxes_ModuleBoxesId" FromRole="ModuleBoxesBox" ToRole="ModuleBoxes" />
+          <Property Name="Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ModuleType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PageModules" Relationship="Model.FK_PageModule_ModuleType_ModuleTypeId" FromRole="ModuleType" ToRole="PageModule" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HeroImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InMenu" Type="Boolean" Nullable="false" />
+          <Property Name="Visible" Type="Boolean" Nullable="false" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="UploadFolder" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PageModules" Relationship="Model.FK_PageModule_Page_PageId" FromRole="Page" ToRole="PageModule" />
+          <Property Name="MobileHeroImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InBottomMenu" Type="Boolean" Nullable="false" />
+          <Property Name="AdminLocked" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ModuleBoxesBox_ModuleBoxes_ModuleBoxesId">
+          <End Type="Model.ModuleBoxes" Role="ModuleBoxes" Multiplicity="1" />
+          <End Type="Model.ModuleBoxesBox" Role="ModuleBoxesBox" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleBoxes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleBoxesBox">
+              <PropertyRef Name="ModuleBoxesId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModuleCallout">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subtitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonText" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonLink" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GreenTitlePrefix" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PageModule">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModuleTypeId" Type="Int32" Nullable="false" />
+          <Property Name="PageId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="Theme" Type="Boolean" Nullable="false" />
+          <Property Name="TransparentBackground" Type="Boolean" Nullable="false" />
+          <Property Name="State" Type="Model.PageModuleStates" Nullable="false" />
+          <NavigationProperty Name="ModuleType" Relationship="Model.FK_PageModule_ModuleType_ModuleTypeId" FromRole="PageModule" ToRole="ModuleType" />
+          <NavigationProperty Name="Page" Relationship="Model.FK_PageModule_Page_PageId" FromRole="PageModule" ToRole="Page" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BlueTitle" Type="Boolean" Nullable="false" />
+          <Property Name="LootBox" Type="Boolean" Nullable="false" />
+          <Property Name="LootBoxTop" Type="Int32" Nullable="false" />
+          <Property Name="LootBoxLeft" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_PageModule_ModuleType_ModuleTypeId">
+          <End Type="Model.ModuleType" Role="ModuleType" Multiplicity="1" />
+          <End Type="Model.PageModule" Role="PageModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PageModule">
+              <PropertyRef Name="ModuleTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PageModule_Page_PageId">
+          <End Type="Model.Page" Role="Page" Multiplicity="1" />
+          <End Type="Model.PageModule" Role="PageModule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PageModule">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EnumType Name="PageModuleStates">
+          <Member Name="Published" />
+          <Member Name="Preview" />
+          <Member Name="PreviewHide" />
+        </EnumType>
+        <EntityType Name="ModuleProfileCards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ModuleProfileCardsCards" Relationship="Model.FK_ModuleProfileCardsCard_ModuleProfileCards_ModuleProfileCardsId" FromRole="ModuleProfileCard" ToRole="ModuleProfileCardsCard" />
+        </EntityType>
+        <EntityType Name="ModuleProfileCardsCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TwitchUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InstagramUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YouTubeUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="ModuleProfileCardsId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModuleProfileCards" Relationship="Model.FK_ModuleProfileCardsCard_ModuleProfileCards_ModuleProfileCardsId" FromRole="ModuleProfileCardsCard" ToRole="ModuleProfileCard" />
+          <NavigationProperty Name="ModuleProfileCardsCardLinks" Relationship="Model.FK_ModuleProfileCardsCardLink_ModuleProfileCardsCard_ModuleProfileCardsCardId" FromRole="ModuleProfileCardsCard" ToRole="ModuleProfileCardsCardLink" />
+        </EntityType>
+        <EntityType Name="ModuleProfileCardsCardLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Url" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="ModuleProfileCardsCardId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModuleProfileCardsCard" Relationship="Model.FK_ModuleProfileCardsCardLink_ModuleProfileCardsCard_ModuleProfileCardsCardId" FromRole="ModuleProfileCardsCardLink" ToRole="ModuleProfileCardsCard" />
+        </EntityType>
+        <Association Name="FK_ModuleProfileCardsCard_ModuleProfileCards_ModuleProfileCardsId">
+          <End Type="Model.ModuleProfileCards" Role="ModuleProfileCard" Multiplicity="1" />
+          <End Type="Model.ModuleProfileCardsCard" Role="ModuleProfileCardsCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleProfileCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleProfileCardsCard">
+              <PropertyRef Name="ModuleProfileCardsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleProfileCardsCardLink_ModuleProfileCardsCard_ModuleProfileCardsCardId">
+          <End Type="Model.ModuleProfileCardsCard" Role="ModuleProfileCardsCard" Multiplicity="1" />
+          <End Type="Model.ModuleProfileCardsCardLink" Role="ModuleProfileCardsCardLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleProfileCardsCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleProfileCardsCardLink">
+              <PropertyRef Name="ModuleProfileCardsCardId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModuleSimpleCards">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ModuleSimpleCardsCards" Relationship="Model.FK_ModuleSimpleCardsCard_ModuleSimpleCards_ModuleSimpleCardsId" FromRole="ModuleSimpleCard" ToRole="ModuleSimpleCardsCard" />
+        </EntityType>
+        <EntityType Name="ModuleSimpleCardsCard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Subtitle" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="ModuleSimpleCardsId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModuleSimpleCards" Relationship="Model.FK_ModuleSimpleCardsCard_ModuleSimpleCards_ModuleSimpleCardsId" FromRole="ModuleSimpleCardsCard" ToRole="ModuleSimpleCard" />
+        </EntityType>
+        <Association Name="FK_ModuleSimpleCardsCard_ModuleSimpleCards_ModuleSimpleCardsId">
+          <End Type="Model.ModuleSimpleCards" Role="ModuleSimpleCard" Multiplicity="1" />
+          <End Type="Model.ModuleSimpleCardsCard" Role="ModuleSimpleCardsCard" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleSimpleCard">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleSimpleCardsCard">
+              <PropertyRef Name="ModuleSimpleCardsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModuleFreeText">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Admins" Relationship="Model.FK_Admin_Role_RoleId" FromRole="Role" ToRole="Admin" />
+        </EntityType>
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="64" FixedLength="true" Unicode="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Active" Type="Boolean" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="Model.FK_Admin_Role_RoleId" FromRole="Admin" ToRole="Role" />
+          <NavigationProperty Name="SiteLogs" Relationship="Model.FK_SiteLog_Admin_AdminId" FromRole="Admin" ToRole="SiteLog" />
+        </EntityType>
+        <Association Name="FK_Admin_Role_RoleId">
+          <End Type="Model.Role" Role="Role" Multiplicity="1" />
+          <End Type="Model.Admin" Role="Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="StackTrace" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IPAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Browser" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Object" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Function" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Line" Type="Int32" />
+          <Property Name="HResult" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InnerMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Important" Type="Boolean" Nullable="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SecurityLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IPAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Browser" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="UserEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="SiteLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="IPAddress" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Page" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Module" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Important" Type="Boolean" Nullable="false" />
+          <Property Name="AdminId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Admin" Relationship="Model.FK_SiteLog_Admin_AdminId" FromRole="SiteLog" ToRole="Admin" />
+        </EntityType>
+        <Association Name="FK_SiteLog_Admin_AdminId">
+          <End Type="Model.Admin" Role="Admin" Multiplicity="1" />
+          <End Type="Model.SiteLog" Role="SiteLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Admin">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SiteLog">
+              <PropertyRef Name="AdminId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModuleGallery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="ModuleGalleryImages" Relationship="Model.FK_ModuleGalleryImage_ModuleGallery_ModuleGalleryId" FromRole="ModuleGallery" ToRole="ModuleGalleryImage" />
+        </EntityType>
+        <EntityType Name="ModuleGalleryImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleGalleryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModuleGallery" Relationship="Model.FK_ModuleGalleryImage_ModuleGallery_ModuleGalleryId" FromRole="ModuleGalleryImage" ToRole="ModuleGallery" />
+          <NavigationProperty Name="ModuleGalleryImageLinks" Relationship="Model.FK_ModuleGalleryImageLink_ModuleGalleryImage_ModuleGalleryImageId" FromRole="ModuleGalleryImage" ToRole="ModuleGalleryImageLink" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModuleGalleryImageLink">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Position" Type="Int32" Nullable="false" />
+          <Property Name="ModuleGalleryImageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModuleGalleryImage" Relationship="Model.FK_ModuleGalleryImageLink_ModuleGalleryImage_ModuleGalleryImageId" FromRole="ModuleGalleryImageLink" ToRole="ModuleGalleryImage" />
+        </EntityType>
+        <Association Name="FK_ModuleGalleryImage_ModuleGallery_ModuleGalleryId">
+          <End Type="Model.ModuleGallery" Role="ModuleGallery" Multiplicity="1" />
+          <End Type="Model.ModuleGalleryImage" Role="ModuleGalleryImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleGallery">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleGalleryImage">
+              <PropertyRef Name="ModuleGalleryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModuleGalleryImageLink_ModuleGalleryImage_ModuleGalleryImageId">
+          <End Type="Model.ModuleGalleryImage" Role="ModuleGalleryImage" Multiplicity="1" />
+          <End Type="Model.ModuleGalleryImageLink" Role="ModuleGalleryImageLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ModuleGalleryImage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModuleGalleryImageLink">
+              <PropertyRef Name="ModuleGalleryImageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ModulePromo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonText" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ButtonLink" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageRight" Type="Boolean" Nullable="false" />
+          <Property Name="TitleTop" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LootBoxClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTimeOffset" Nullable="false" Precision="7" />
+          <Property Name="Prize" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Redeemed" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SiteSettings">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MetaSiteTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MetaSiteDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaFaviconImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaOgLocale" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MetaOgTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MetaOgDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaOgImageType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MetaOgImageWidth" Type="Int32" />
+          <Property Name="MetaOgImageHeight" Type="Int32" />
+          <Property Name="MetaOgUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaOgSiteName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MetaOgType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="HeaderHomeImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FooterHomeImageUrlLight" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FooterHomeImageUrlDark" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BlogUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ForumUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShopUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FacebookUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TwitterUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="YouTubeUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TwitchUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaTwitterCard" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="MetaTwitterSite" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MetaTwitterTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MetaTwitterDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RedditUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LootBoxImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LootBoxPopupTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LootBoxPopupText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaOgImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MetaTwitterImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LoadingImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorImage401Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorImage403Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorImage404Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorImage500Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorImage503Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ErrorImageIconTopUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="NTGDB">
+          <EntitySetMapping Name="ModuleBoxes">
+            <EntityTypeMapping TypeName="Model.ModuleBoxes">
+              <MappingFragment StoreEntitySet="ModuleBoxes">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleBoxesBox">
+            <EntityTypeMapping TypeName="Model.ModuleBoxesBox">
+              <MappingFragment StoreEntitySet="ModuleBoxesBox">
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="ModuleBoxesId" ColumnName="ModuleBoxesId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleType">
+            <EntityTypeMapping TypeName="Model.ModuleType">
+              <MappingFragment StoreEntitySet="ModuleType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Page">
+            <EntityTypeMapping TypeName="Model.Page">
+              <MappingFragment StoreEntitySet="Page">
+                <ScalarProperty Name="AdminLocked" ColumnName="AdminLocked" />
+                <ScalarProperty Name="InBottomMenu" ColumnName="InBottomMenu" />
+                <ScalarProperty Name="MobileHeroImage" ColumnName="MobileHeroImage" />
+                <ScalarProperty Name="UploadFolder" ColumnName="UploadFolder" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="InMenu" ColumnName="InMenu" />
+                <ScalarProperty Name="HeroImage" ColumnName="HeroImage" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleCallouts">
+            <EntityTypeMapping TypeName="Model.ModuleCallout">
+              <MappingFragment StoreEntitySet="ModuleCallout">
+                <ScalarProperty Name="GreenTitlePrefix" ColumnName="GreenTitlePrefix" />
+                <ScalarProperty Name="ButtonLink" ColumnName="ButtonLink" />
+                <ScalarProperty Name="ButtonText" ColumnName="ButtonText" />
+                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PageModules">
+            <EntityTypeMapping TypeName="Model.PageModule">
+              <MappingFragment StoreEntitySet="PageModule">
+                <ScalarProperty Name="LootBoxLeft" ColumnName="LootBoxLeft" />
+                <ScalarProperty Name="LootBoxTop" ColumnName="LootBoxTop" />
+                <ScalarProperty Name="LootBox" ColumnName="LootBox" />
+                <ScalarProperty Name="BlueTitle" ColumnName="BlueTitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="TransparentBackground" ColumnName="TransparentBackground" />
+                <ScalarProperty Name="Theme" ColumnName="Theme" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="ModuleTypeId" ColumnName="ModuleTypeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleProfileCards">
+            <EntityTypeMapping TypeName="Model.ModuleProfileCards">
+              <MappingFragment StoreEntitySet="ModuleProfileCards">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleProfileCardsCards">
+            <EntityTypeMapping TypeName="Model.ModuleProfileCardsCard">
+              <MappingFragment StoreEntitySet="ModuleProfileCardsCard">
+                <ScalarProperty Name="ModuleProfileCardsId" ColumnName="ModuleProfileCardsId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="YouTubeUrl" ColumnName="YouTubeUrl" />
+                <ScalarProperty Name="InstagramUrl" ColumnName="InstagramUrl" />
+                <ScalarProperty Name="TwitchUrl" ColumnName="TwitchUrl" />
+                <ScalarProperty Name="TwitterUrl" ColumnName="TwitterUrl" />
+                <ScalarProperty Name="FacebookUrl" ColumnName="FacebookUrl" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleProfileCardsCardLinks">
+            <EntityTypeMapping TypeName="Model.ModuleProfileCardsCardLink">
+              <MappingFragment StoreEntitySet="ModuleProfileCardsCardLink">
+                <ScalarProperty Name="ModuleProfileCardsCardId" ColumnName="ModuleProfileCardsCardId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleSimpleCards">
+            <EntityTypeMapping TypeName="Model.ModuleSimpleCards">
+              <MappingFragment StoreEntitySet="ModuleSimpleCards">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleSimpleCardsCards">
+            <EntityTypeMapping TypeName="Model.ModuleSimpleCardsCard">
+              <MappingFragment StoreEntitySet="ModuleSimpleCardsCard">
+                <ScalarProperty Name="ModuleSimpleCardsId" ColumnName="ModuleSimpleCardsId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Subtitle" ColumnName="Subtitle" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleFreeTexts">
+            <EntityTypeMapping TypeName="Model.ModuleFreeText">
+              <MappingFragment StoreEntitySet="ModuleFreeText">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="Model.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="Model.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Important" ColumnName="Important" />
+                <ScalarProperty Name="InnerMessage" ColumnName="InnerMessage" />
+                <ScalarProperty Name="HResult" ColumnName="HResult" />
+                <ScalarProperty Name="Line" ColumnName="Line" />
+                <ScalarProperty Name="Function" ColumnName="Function" />
+                <ScalarProperty Name="Object" ColumnName="Object" />
+                <ScalarProperty Name="Browser" ColumnName="Browser" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="StackTrace" ColumnName="StackTrace" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SecurityLogs">
+            <EntityTypeMapping TypeName="Model.SecurityLog">
+              <MappingFragment StoreEntitySet="SecurityLog">
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Browser" ColumnName="Browser" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteLogs">
+            <EntityTypeMapping TypeName="Model.SiteLog">
+              <MappingFragment StoreEntitySet="SiteLog">
+                <ScalarProperty Name="AdminId" ColumnName="AdminId" />
+                <ScalarProperty Name="Important" ColumnName="Important" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Module" ColumnName="Module" />
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="IPAddress" ColumnName="IPAddress" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleGalleries">
+            <EntityTypeMapping TypeName="Model.ModuleGallery">
+              <MappingFragment StoreEntitySet="ModuleGallery">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleGalleryImages">
+            <EntityTypeMapping TypeName="Model.ModuleGalleryImage">
+              <MappingFragment StoreEntitySet="ModuleGalleryImage">
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="ModuleGalleryId" ColumnName="ModuleGalleryId" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModuleGalleryImageLinks">
+            <EntityTypeMapping TypeName="Model.ModuleGalleryImageLink">
+              <MappingFragment StoreEntitySet="ModuleGalleryImageLink">
+                <ScalarProperty Name="ModuleGalleryImageId" ColumnName="ModuleGalleryImageId" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ModulePromoes">
+            <EntityTypeMapping TypeName="Model.ModulePromo">
+              <MappingFragment StoreEntitySet="ModulePromo">
+                <ScalarProperty Name="TitleTop" ColumnName="TitleTop" />
+                <ScalarProperty Name="ImageRight" ColumnName="ImageRight" />
+                <ScalarProperty Name="ButtonLink" ColumnName="ButtonLink" />
+                <ScalarProperty Name="ButtonText" ColumnName="ButtonText" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LootBoxClaims">
+            <EntityTypeMapping TypeName="Model.LootBoxClaim">
+              <MappingFragment StoreEntitySet="LootBoxClaim">
+                <ScalarProperty Name="Redeemed" ColumnName="Redeemed" />
+                <ScalarProperty Name="Prize" ColumnName="Prize" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SiteSettings1">
+            <EntityTypeMapping TypeName="Model.SiteSettings">
+              <MappingFragment StoreEntitySet="SiteSettings">
+                <ScalarProperty Name="ErrorImageIconTopUrl" ColumnName="ErrorImageIconTopUrl" />
+                <ScalarProperty Name="ErrorImage503Url" ColumnName="ErrorImage503Url" />
+                <ScalarProperty Name="ErrorImage500Url" ColumnName="ErrorImage500Url" />
+                <ScalarProperty Name="ErrorImage404Url" ColumnName="ErrorImage404Url" />
+                <ScalarProperty Name="ErrorImage403Url" ColumnName="ErrorImage403Url" />
+                <ScalarProperty Name="ErrorImage401Url" ColumnName="ErrorImage401Url" />
+                <ScalarProperty Name="LoadingImageUrl" ColumnName="LoadingImageUrl" />
+                <ScalarProperty Name="MetaTwitterImageUrl" ColumnName="MetaTwitterImageUrl" />
+                <ScalarProperty Name="MetaOgImageUrl" ColumnName="MetaOgImageUrl" />
+                <ScalarProperty Name="LootBoxPopupText" ColumnName="LootBoxPopupText" />
+                <ScalarProperty Name="LootBoxPopupTitle" ColumnName="LootBoxPopupTitle" />
+                <ScalarProperty Name="LootBoxImageUrl" ColumnName="LootBoxImageUrl" />
+                <ScalarProperty Name="RedditUrl" ColumnName="RedditUrl" />
+                <ScalarProperty Name="MetaTwitterDescription" ColumnName="MetaTwitterDescription" />
+                <ScalarProperty Name="MetaTwitterTitle" ColumnName="MetaTwitterTitle" />
+                <ScalarProperty Name="MetaTwitterSite" ColumnName="MetaTwitterSite" />
+                <ScalarProperty Name="MetaTwitterCard" ColumnName="MetaTwitterCard" />
+                <ScalarProperty Name="TwitchUrl" ColumnName="TwitchUrl" />
+                <ScalarProperty Name="YouTubeUrl" ColumnName="YouTubeUrl" />
+                <ScalarProperty Name="TwitterUrl" ColumnName="TwitterUrl" />
+                <ScalarProperty Name="FacebookUrl" ColumnName="FacebookUrl" />
+                <ScalarProperty Name="ShopUrl" ColumnName="ShopUrl" />
+                <ScalarProperty Name="ForumUrl" ColumnName="ForumUrl" />
+                <ScalarProperty Name="BlogUrl" ColumnName="BlogUrl" />
+                <ScalarProperty Name="FooterHomeImageUrlDark" ColumnName="FooterHomeImageUrlDark" />
+                <ScalarProperty Name="FooterHomeImageUrlLight" ColumnName="FooterHomeImageUrlLight" />
+                <ScalarProperty Name="HeaderHomeImageUrl" ColumnName="HeaderHomeImageUrl" />
+                <ScalarProperty Name="MetaOgType" ColumnName="MetaOgType" />
+                <ScalarProperty Name="MetaOgSiteName" ColumnName="MetaOgSiteName" />
+                <ScalarProperty Name="MetaOgUrl" ColumnName="MetaOgUrl" />
+                <ScalarProperty Name="MetaOgImageHeight" ColumnName="MetaOgImageHeight" />
+                <ScalarProperty Name="MetaOgImageWidth" ColumnName="MetaOgImageWidth" />
+                <ScalarProperty Name="MetaOgImageType" ColumnName="MetaOgImageType" />
+                <ScalarProperty Name="MetaOgDescription" ColumnName="MetaOgDescription" />
+                <ScalarProperty Name="MetaOgTitle" ColumnName="MetaOgTitle" />
+                <ScalarProperty Name="MetaOgLocale" ColumnName="MetaOgLocale" />
+                <ScalarProperty Name="MetaFaviconImageUrl" ColumnName="MetaFaviconImageUrl" />
+                <ScalarProperty Name="MetaSiteDescription" ColumnName="MetaSiteDescription" />
+                <ScalarProperty Name="MetaSiteTitle" ColumnName="MetaSiteTitle" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

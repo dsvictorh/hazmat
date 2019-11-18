@@ -1,0 +1,63 @@
+﻿.promo{
+    > div{
+        .clear(both);
+    }
+
+    .mobile{
+        display: none;
+
+        @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+            display: block;
+	    }
+    }
+
+    .desktop{
+        @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+            display: none;
+	    }
+    }
+
+    figure{
+        float: left;
+        width: 30%;
+        overflow: hidden;
+        border-radius: 5px;
+
+        @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+            float: none;
+            width: 50%;
+            margin: 0 auto 30px;
+	    }
+
+        &.right{
+            float: right;
+
+            @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                float: none;
+	        }
+        }
+    }
+
+    section{
+        width: 70%;
+        float: left;
+        box-sizing: border-box;
+        padding: 0 30px;
+        text-align: center;
+
+        @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+            float: none;
+            width: 100%;
+	    }
+
+        p{
+            text-align: inherit;
+        }
+
+        a{
+            font-size: 2rem;
+            margin-top: 20px;
+            display: inline-block;
+        }
+    }
+}

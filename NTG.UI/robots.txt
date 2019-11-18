@@ -1,0 +1,10 @@
+﻿User-agent: *
+Disallow: /
+User-agent: Googlebot
+Allow: /
+Disallow: /hazmat/
+User-agent: Slurp
+Allow: /
+Disallow: /hazmat/
+User-Agent: msnbot
+Disallow: /

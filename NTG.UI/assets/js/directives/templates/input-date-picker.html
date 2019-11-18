@@ -1,0 +1,8 @@
+﻿<div class="input-field date-time" ng-hide="hide" ng-class="{'shadow': panel, 'half-field': halfField, 'left': halfField == 'left', 'right': halfField == 'right'}">
+    <label for="{{inputId}}">{{label}}<i class="required" ng-if="required">*</i></label>
+    <i ng-if="model" ng-click="clearDate()"></i>
+    <input class="input" type="text" ng-if="changeDate" date-time date-change="changeDate" format="{{format}}" view="{{defaultView}}" watch-direct-changes="true" auto-close="true" max-view="{{maxView}}" min-view="{{minView}}" ng-disabled="disable" name="{{inputId}}" id="{{inputId}}" ng-model="dateModel.date" />  
+    <div class="errors" ng-if="errors && errors.length">
+        <p ng-repeat="error in errors">{{error.text}}</p>
+    </div>
+</div>

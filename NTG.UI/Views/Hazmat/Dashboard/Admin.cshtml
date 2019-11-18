@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Account Details";
+}
+
+<article ng-controller="AccountController">
+    <div ng-if="success == null" class="loading-page">
+        <div class="loading-icon"></div>
+    </div>
+    <div ng-if="success">
+        <h1>Account Details</h1>
+        <section>
+            <form ng-submit="save()" focusable-objects>
+                <input-info-field model="model.Role" label="Role" flip-bold="true"></input-info-field>
+                <input-text input-id="email" model="model.Email" max-length="100" label="Email" required="true" errors="messages['email']"></input-text>
+                <input-text input-id="first-name" model="model.FirstName" max-length="50" label="First Name" required="true" errors="messages['firstname']"></input-text>
+                <input-text input-id="last-name" model="model.LastName" max-length="50" label="Last Name" required="true" errors="messages['lastname']"></input-text>
+                <input-text input-id="password" model="model.Password" label="Change Password" is-password="true" errors="messages['password']"></input-text>
+                <input-text input-id="verify-password"  hide="!model.Password" model="model.VerifyPassword" label="Verify Password" is-password="true" errors="messages['verifypassword']"></input-text>
+                <submit-button text="Save Changes" submitting-text="Saving..." loading="submitting"></submit-button>
+                <cancel-button ng-click="reset(true)">
+            </form>
+        </section>
+    </div>    
+</article>
+
+@section Scripts{
+    <script src="@Url.Content("~/assets/js/hazmat/services/user-service.js")"></script>
+    <script src="@Url.Content("~/assets/js/hazmat/controllers/account-controller.js")"></script>
+}

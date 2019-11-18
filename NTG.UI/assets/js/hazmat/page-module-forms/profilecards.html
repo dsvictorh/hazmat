@@ -1,0 +1,31 @@
+﻿<ul class="box-container">
+    <li ng-repeat="card in module.Details.ModuleProfileCardsCards" class="box bottom-sort" ng-class="{ 'deleted' : card.IsDelete}">
+        <div class="shadow">
+            <i class="delete-corner small" title="{{card.IsDelete ? 'Restore' : 'Delete'}} card" ng-click="deleteItem($index, module.Details.ModuleProfileCardsCards, card.Id ? { togglePropName: 'IsDelete' } : { removeItem: true, updatePositionPropName: 'Position' })"></i>
+            <input-image-picker input-id="card-image{{card.Position}}" required="true" change="card.IsModified = true" folder="model.Page.UploadFolder" model="card.Image" resize="{ width: 128, height: 128}" label="Image" recommend-size="128x128" hide-list="true" compact-recommend="true" recommend-ratio="1:1" errors="messages['imagecard' + card.Position + 'profilecards' + (module.Details.Id || '')]"></input-image-picker>
+            <input-text input-id="profilecard{{module.Details.Id || ''}}-name{{card.Position}}" change="card.IsModified = true" model="card.Name" required="true" disable="card.IsDelete" max-length="30" label="Name" errors="messages['namecard' + card.Position + 'profilecards' + (module.Details.Id || '')]"></input-text>
+            <input-text input-id="profilecard{{module.Details.Id || ''}}-twitch-url{{card.Position}}" change="card.IsModified = true" model="card.TwitchUrl" disable="card.IsDelete" label="Twitch Url" errors="messages['twitchurlcard' + card.Position + 'profilecards' + (module.Details.Id || '')]"></input-text>
+            <input-text input-id="profilecard{{module.Details.Id || ''}}-youtube-url{{card.Position}}" change="card.IsModified = true" model="card.YouTubeUrl" disable="card.IsDelete" label="YouTube Url" errors="messages['youtubeurlcard' + card.Position + 'profilecards' + (module.Details.Id || '')]"></input-text>
+            <input-text input-id="profilecard{{module.Details.Id || ''}}-twitter-url{{card.Position}}" change="card.IsModified = true" model="card.TwitterUrl" disable="card.IsDelete" label="Twitter Url" errors="messages['twitterurlcard' + card.Position + 'profilecards' + (module.Details.Id || '')]"></input-text>
+            <input-text input-id="profilecard{{module.Details.Id || ''}}-instagram-url{{card.Position}}" change="card.IsModified = true" model="card.InstagramUrl" disable="card.IsDelete" label="Instagram Url" errors="messages['instagramurlcard' + card.Position + 'profilecards' + (module.Details.Id || '')]"></input-text>
+            <input-text input-id="profilecard{{module.Details.Id || ''}}-facebook-url{{card.Position}}" change="card.IsModified = true" model="card.FacebookUrl" disable="card.IsDelete" label="Facebook Url" errors="messages['facebookurlcard' + card.Position + 'profilecards' + (module.Details.Id || '')]"></input-text>
+            <ul class="sub-container">
+                <li ng-repeat="link in card.ModuleProfileCardsCardLinks" class="box" ng-class="{ 'deleted' : link.IsDelete}">
+                    <div class="shadow">
+                        <i class="delete-corner small" title="{{link.IsDelete ? 'Restore' : 'Delete'}} link" ng-click="deleteItem($index, card.ModuleProfileCardsCardLinks, link.Id ? { togglePropName: 'IsDelete' } : { removeItem: true, updatePositionPropName: 'Position' })"></i>
+                        <input-text input-id="profilecard{{module.Details.Id || ''}}-card{{card.Position}}-link{{link.Position}}-text" change="link.IsModified = true; card.IsModified = true" model="link.Text" required="true" max-length="15" disable="link.IsDelete" label="Text" errors="messages['textlink' + link.Position + 'profilecardscard' + (card.Id || '')]"></input-text>
+                        <input-text input-id="profilecard{{module.Details.Id || ''}}-card{{card.Position}}-link{{link.Position}}-url" change="link.IsModified = true; card.IsModified = true" model="link.Url" required="true" disable="link.IsDelete" label="Url" errors="messages['urllink' + link.Position + 'profilecardscard' + (card.Id || '')]"></input-text>
+                        <sort-arrows collection="card.ModuleProfileCardsCardLinks" change-property="IsModified" change="card.IsModified = true" disable="link.IsDelete" item-name="link" vertical="true" sort-property-name="Position" index="$index"></sort-arrows>
+                    </div>
+                </li>
+                <li class="box add">
+                    <div class="shadow" title="Add link" ng-click="addModuleSubitem(card.ModuleProfileCardsCardLinks, { Position: card.ModuleProfileCardsCardLinks.length + 1, IsModified: true })"></div>
+                </li>
+            </ul>
+            <sort-arrows collection="module.Details.ModuleProfileCardsCards" change-property="IsModified" disable="card.IsDelete" item-name="card" mobile-small-vertical="true" sort-property-name="Position" index="$index"></sort-arrows>
+        </div>
+    </li>
+    <li class="box add bottom-sort">
+        <div class="shadow" title="Add card" ng-click="addModuleSubitem(module.Details.ModuleProfileCardsCards, { Position: module.Details.ModuleProfileCardsCards.length + 1, ModuleProfileCardsCardLinks: [], IsModified: true })"></div>
+    </li>
+</ul>

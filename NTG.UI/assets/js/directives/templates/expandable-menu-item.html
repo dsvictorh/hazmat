@@ -1,0 +1,8 @@
+﻿<li focusable-objects>
+    <a href="{{url || 'javascript:void(0)'}}" target="_self" ng-click="action ? action(actionParams) : void()" focus-object><i ng-if="icon">{{icon}}</i><span ng-if="label" ng-class="{arrow: submenu && submenu.length}">{{label}}</span></a>
+    <ul class="submenu" ng-if="submenu && submenu.length" ng-click="$event.stopPropagation();" focusable-objects>
+        <li ng-repeat="item in submenu">
+            <a href="{{item.url && !item.locked ? item.url : 'javascript:void(0)'}}" target="_self" ng-class="{'locked': item.locked}" ng-click="item.action && !item.locked ? item.action(item.actionParams) : void()" focus-object>{{item.label}}</a>
+        </li>
+    </ul>
+</li>

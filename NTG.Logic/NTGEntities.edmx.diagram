@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1e4df01a770541959bb811c2ca3e3732" Name="Diagram1" ZoomLevel="55">
+        <EntityTypeShape EntityType="Model.ModuleBoxes" Width="1.5" PointX="3.75" PointY="1.375" />
+        <EntityTypeShape EntityType="Model.ModuleBoxesBox" Width="1.5" PointX="6" PointY="1" />
+        <EntityTypeShape EntityType="Model.ModuleType" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="Model.Page" Width="1.5" PointX="4.75" PointY="4.75" />
+        <AssociationConnector Association="Model.FK_ModuleBoxesBox_ModuleBoxes_ModuleBoxesId" />
+        <EntityTypeShape EntityType="Model.ModuleCallout" Width="1.5" PointX="0.625" PointY="5" />
+        <EntityTypeShape EntityType="Model.PageModule" Width="1.5" PointX="10" PointY="4.625" />
+        <AssociationConnector Association="Model.FK_PageModule_ModuleType_ModuleTypeId" />
+        <AssociationConnector Association="Model.FK_PageModule_Page_PageId" />
+        <EntityTypeShape EntityType="Model.ModuleProfileCards" Width="1.5" PointX="0.75" PointY="9.875" />
+        <EntityTypeShape EntityType="Model.ModuleProfileCardsCard" Width="1.5" PointX="3" PointY="9" />
+        <EntityTypeShape EntityType="Model.ModuleProfileCardsCardLink" Width="1.5" PointX="5.25" PointY="9.625" />
+        <AssociationConnector Association="Model.FK_ModuleProfileCardsCard_ModuleProfileCards_ModuleProfileCardsId" />
+        <AssociationConnector Association="Model.FK_ModuleProfileCardsCardLink_ModuleProfileCardsCard_ModuleProfileCardsCardId" />
+        <EntityTypeShape EntityType="Model.ModuleSimpleCards" Width="1.5" PointX="8.375" PointY="1.375" />
+        <EntityTypeShape EntityType="Model.ModuleSimpleCardsCard" Width="1.5" PointX="10.625" PointY="1" />
+        <AssociationConnector Association="Model.FK_ModuleSimpleCardsCard_ModuleSimpleCards_ModuleSimpleCardsId" />
+        <EntityTypeShape EntityType="Model.ModuleFreeText" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.Role" Width="1.5" PointX="0.75" PointY="12.25" />
+        <EntityTypeShape EntityType="Model.Admin" Width="1.5" PointX="3" PointY="13.75" />
+        <AssociationConnector Association="Model.FK_Admin_Role_RoleId" />
+        <EntityTypeShape EntityType="Model.ErrorLog" Width="1.5" PointX="9.75" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.SecurityLog" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.SiteLog" Width="1.5" PointX="5.625" PointY="13.75" />
+        <AssociationConnector Association="Model.FK_SiteLog_Admin_AdminId" />
+        <EntityTypeShape EntityType="Model.ModuleGallery" Width="1.5" PointX="12.375" PointY="5.375" />
+        <EntityTypeShape EntityType="Model.ModuleGalleryImage" Width="1.5" PointX="14.625" PointY="5" />
+        <EntityTypeShape EntityType="Model.ModuleGalleryImageLink" Width="1.5" PointX="16.875" PointY="4.875" />
+        <AssociationConnector Association="Model.FK_ModuleGalleryImage_ModuleGallery_ModuleGalleryId" />
+        <AssociationConnector Association="Model.FK_ModuleGalleryImageLink_ModuleGalleryImage_ModuleGalleryImageId" />
+        <EntityTypeShape EntityType="Model.ModulePromo" Width="1.5" PointX="12.375" PointY="8.75" />
+        <EntityTypeShape EntityType="Model.LootBoxClaim" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="Model.SiteSettings" Width="2.75" PointX="12.375" PointY="12.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

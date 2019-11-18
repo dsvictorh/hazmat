@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Error Log";
+}
+
+<article ng-controller="ErrorLogController">
+    <div>
+        <h1>Error Log</h1>
+        <div class="filter-form">
+            <input-text input-id="filter-ipaddress" model="filter.IPAddress" label="IP Address"></input-text>
+            <input-text input-id="filter-message" model="filter.Message" label="Message/Inner Message"></input-text>
+            <input-date-picker input-id="filter-datefrom" model="filter.DateFrom" label="From"></input-date-picker>
+            <input-date-picker input-id="filter-dateto" model="filter.DateTo" label="To"></input-date-picker>
+        </div>
+        <grid config="gridConfig" filter="filter"></grid>
+    </div>
+</article>
+
+@section Scripts{
+    <script src="@Url.Content("~/assets/js/hazmat/services/logs-service.js")"></script>
+    <script src="@Url.Content("~/assets/js/hazmat/controllers/error-log-controller.js")"></script>
+    <script src="@Url.Content("~/assets/js/directives/grid.js")"></script>
+}

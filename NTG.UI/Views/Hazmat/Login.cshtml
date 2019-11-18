@@ -1,0 +1,37 @@
+﻿@model  NTG.UI.Models.Hazmat.LoginViewModel
+@{
+    ViewBag.Title = "Login";
+    ViewBag.HideMenu = true;
+}
+
+<article class="login" ng-controller="LoginController">
+    <div>
+        <form class="shadow" ng-submit="login()">
+            <figure>
+                <img src="@Url.Content("~/assets/img/logo/ntg-border-black-300.png")" />
+                <figcaption>Powered by Hazmat</figcaption>
+            </figure>
+            <fieldset>
+                <input-text input-id="email" label="Email" model="email" errors="messages['email']"></input-text>
+                <input-text input-id="password" label="Password" model="password" is-password="true" errors="messages['password']"></input-text>
+                <input-check input-id="persist" label="Keep me logged in" model="persist"></input-check>
+                <submit-button text="Sign In" submitting-text="Please Wait..." loading="submitting"></submit-button>
+
+                @if (!Model.IsAdmin)
+                {
+                <footer>
+                    <a>Forgot your password?</a>
+                    <a>Register</a>
+                </footer>
+                }
+            </fieldset>
+        </form>    
+    </div>
+</article>
+
+@section Scripts{
+    <script src="@Url.Content("~/assets/js/hazmat/services/login-service.js")"></script>
+    <script src="@Url.Content("~/assets/js/hazmat/controllers/login-controller.js")"></script>
+}
+
+

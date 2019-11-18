@@ -1,0 +1,17 @@
+﻿<input-wysiwyg input-id="boxes-text{{module.Details.Id || null}}" restrict-to-paragraph="true" model="module.Details.Text" label="Text" errors="messages['textboxes' + (module.Details.Id || '')]"></input-wysiwyg>
+<ul class="box-container">
+    <li ng-repeat="box in module.Details.ModuleBoxesBox" class="box" ng-class="{ 'deleted': box.IsDelete}">
+        <div class="shadow">
+            <i class="delete-corner small" title="{{module.Delete ? 'Restore' : 'Delete'}} module" ng-click="deleteItem($index, module.Details.ModuleBoxesBox, box.Id ? { togglePropName: 'IsDelete' } : { removeItem: true, updatePositionPropName: 'Position' })"></i>
+            <input-text input-id="box-title{{box.Position}}" change="box.IsModified = true" model="box.Title" required="true" disable="box.IsDelete" max-length="25" label="Title" errors="messages['titlebox' + box.Position + 'boxes' + (module.Details.Id || '')]"></input-text>
+            <input-icon-picker input-id="box-icon{{box.Position}}boxes{{module.Details.Id || null}}" change="box.IsModified = true" disable="box.IsDelete" model="box.Icon" color-model="box.Color" required="true" label="Icon" errors="messages['iconbox' + box.Position + 'boxes' + (module.Details.Id || '')]"></input-icon-picker>
+            <input-dropdown input-id="box-color{{box.Position}}boxes{{module.Details.Id || null}}" change="box.IsModified = true" disable="box.IsDelete" model="box.Color" required="true" options="[{ label: 'Green', value: 'green' }, { label: 'Yellow', value: 'yellow' }, { label: 'Blue', value: 'blue' }]" display="label" value="value" label="Icon Color" errors="messages['colorbox' + box.Position + 'boxes' + (module.Details.Id || '')]"></input-dropdown>
+            <input-text input-id="box-text{{box.Position}}boxes{{module.Details.Id || null}}" change="box.IsModified = true" disable="box.IsDelete" model="box.Text" required="true" max-length="95" label="Text" errors="messages['textbox' + box.Position + 'boxes' + (module.Details.Id || '')]"></input-text>
+            <input-text input-id="box-url{{box.Position}}boxes{{module.Details.Id || null}}" change="box.IsModified = true" disable="box.IsDelete" model="box.Url" label="Url" errors="messages['urlbox' + box.Position + 'boxes' + (module.Details.Id || '')]"></input-text>
+            <sort-arrows collection="module.Details.ModuleBoxesBox" change-property="IsModified" disable="box.IsDelete" item-name="box" mobile-small-vertical="true" sort-property-name="Position" index="$index"></sort-arrows>
+        </div>
+    </li>
+    <li class="box add">
+        <div class="shadow" title="Add Box" ng-click="addModuleSubitem(module.Details.ModuleBoxesBox, { Color: 'green', Position: module.Details.ModuleBoxesBox.length + 1, IsModified: true })"></div>
+    </li>
+</ul>

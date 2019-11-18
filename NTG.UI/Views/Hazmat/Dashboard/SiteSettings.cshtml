@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Site Settings";
+}
+
+<article class="page-editor" ng-controller="SiteSettingsController">
+    <div ng-if="!pageLoaded" class="loading-page">
+        <div class="loading-icon"></div>
+    </div>
+    <div ng-if="pageLoaded && success">
+        <h1>Site Settings</h1>
+        <form ng-submit="saveChanges()" focusable-objects class="page-modules">
+            <section ng-class="{ 'expanded': model.layoutExpanded }"  class="form shadow">
+                <header>
+                    <h3>Layout <i ng-click="toggleExpandModule('layoutExpanded')"></i></h3>
+                </header>  
+                <div class="fields">
+                    <input-image-picker input-id="header-home-image-url" folder="model.uploadFolder" tags="['HeaderHome']" model="model.settings.HeaderHomeImageUrl" resize="{ width: 72, height: 47}" label="Header Home Image" hide-list="true" recommend-size="72x47" errors="messages['headerhomeimageurl']" warnnings="warnings.headerHomeImageUrl"></input-image-picker>
+                    <input-image-picker input-id="footer-home-image-url-light" folder="model.uploadFolder" tags="['FooterHomeLight']" model="model.settings.FooterHomeImageUrlLight" resize="{ width: 150, height: 98}" label="Footer Home Image (Light)" hide-list="true" recommend-size="150x98" errors="messages['footerhomeimageurllight']" warnnings="warnings.footerHomeImageUrlLight"></input-image-picker>
+                    <input-image-picker input-id="footer-home-image-url-dark" folder="model.uploadFolder" tags="['FooterHomeDark']" model="model.settings.FooterHomeImageUrlDark" resize="{ width: 150, height: 98}" label="Footer Home Image (Dark)" hide-list="true" recommend-size="150x98" errors="messages['footerhomeimageurldark']" warnnings="warnings.footerHomeImageUrlDark"></input-image-picker>
+                    <input-image-picker input-id="loading-image-url" folder="model.uploadFolder" tags="['LoadingIcon']" model="model.settings.LoadingImageUrl" resize="{ width: 150, height: 98}" label="Loading Icon" hide-list="true" recommend-size="150x98" errors="messages['loadingimageurl']" warnnings="warnings.headerHomeImageUrl"></input-image-picker>
+                    <input-text input-id="blog-url" model="model.settings.BlogUrl" label="Blog Url" errors="messages['blogurl']"></input-text>
+                    <input-text input-id="forum-url" model="model.settings.ForumUrl" label="Forum Url" errors="messages['forumurl']"></input-text>
+                    <input-text input-id="shop-url" model="model.settings.ShopUrl" label="Shop Url" errors="messages['shopurl']"></input-text>
+                    <input-text input-id="facebook-url" model="model.settings.FacebookUrl" label="Facebook Url" errors="messages['facebookurl']"></input-text>
+                    <input-text input-id="twitter-url" model="model.settings.TwitterUrl" label="Twitter Url" errors="messages['twitterurl']"></input-text>
+                    <input-text input-id="reddit-url" model="model.settings.RedditUrl" label="Reddit Url" errors="messages['redditurl']"></input-text>
+                    <input-text input-id="youtube-url" model="model.settings.YouTubeUrl" label="YouTube Url" errors="messages['youtubeurl']"></input-text>
+                    <input-text input-id="twitch-url" model="model.settings.TwitchUrl" label="Twitch Url" errors="messages['twitchurl']"></input-text>
+                </div>                
+            </section>
+            <section ng-class="{ 'expanded': model.lootBoxExpanded }" class="form shadow">
+                <header>
+                    <h3>Loot Box <i ng-click="toggleExpandModule('lootBoxExpanded')"></i></h3>
+                </header>
+                <div class="fields">
+                    <input-image-picker input-id="loot-box-image-url" folder="model.uploadFolder" tags="['LootBox']" model="model.settings.LootBoxImageUrl" resize="{ width: 50, height: 54}" label="Image" hide-list="true" recommend-size="50x54" errors="messages['lootboximageurl']" warnings="warnings.lootBoxImageUrl"></input-image-picker>
+                    <input-text input-id="loot-box-popup-title" max-length="50" model="model.settings.LootBoxPopupTitle" label="Popup Title" errors="messages['lootboxpopuptitle']"></input-text>
+                    <input-text input-id="loot-box-popup-text" model="model.settings.LootBoxPopupText" label="Popup Text" errors="messages['lootboxpopuptext']"></input-text>
+                </div>
+            </section>
+            <section ng-class="{ 'expanded': model.metaTagsExpanded }" class="form shadow">
+                <header>
+                    <h3>Meta Tags <i ng-click="toggleExpandModule('metaTagsExpanded')"></i></h3>
+                </header>
+                <div class="fields">
+                    <input-image-picker input-id="meta-favicon-image-url" folder="model.uploadFolder" tags="['Favicon']" model="model.settings.MetaFaviconImageUrl" resize="{ width: 35, height: 35}" label="Favicon" hide-list="true" recommend-size="16x16" errors="messages['metafaviconimageurl']" warnings="warnings.metaFaviconImageUrl"></input-image-picker>
+                    <input-text input-id="meta-site-title" max-length="50" model="model.settings.MetaSiteTitle" label="Site Title" errors="messages['metasitetitle']"></input-text>
+                    <input-text input-id="meta-site-description" model="model.settings.MetaSiteDescription" label="Site Description" errors="messages['metasitedescription']"></input-text>
+                </div>
+            </section>
+            <section ng-class="{ 'expanded': model.openGraphTagsExpanded }" class="form shadow">
+                <header>
+                    <h3>Open Graph Tags <i ng-click="toggleExpandModule('openGraphTagsExpanded')"></i></h3>
+                </header>
+                <div class="fields">
+                    <input-image-picker input-id="meta-og-image-url" folder="model.uploadFolder" tags="['OpenGraph']" model="model.settings.MetaOgImageUrl" resize="{ width: 600, height: 315}" label="Image" hide-list="true" recommend-size="1200x630" errors="messages['metaogimageurl']"></input-image-picker>
+                    <input-text input-id="meta-og-image-type" model="model.settings.MetaOgImageType" max-length="20" label="Image Type" errors="messages['metaogimagetype']"></input-text>
+                    <input-text input-id="meta-og-image-width" model="model.settings.MetaOgImageWidth" label="Image Width" errors="messages['metaogimagewidth']"></input-text>
+                    <input-text input-id="meta-og-image-height" model="model.settings.MetaOgImageHeight" label="Image Height" errors="messages['metaogimageheight']"></input-text>
+                    <input-text input-id="meta-og-url" model="model.settings.MetaOgUrl" label="Url" errors="messages['metaogimageurl']"></input-text>
+                    <input-text input-id="meta-og-site-name" model="model.settings.MetaOgSiteName" max-length="50" label="Site Name" errors="messages['metaogsitename']"></input-text>
+                    <input-text input-id="meta-og-title" model="model.settings.MetaOgTitle" label="Title"  max-length="50" errors="messages['metaogtitle']"></input-text>
+                    <input-text input-id="meta-og-description" model="model.settings.MetaOgDescription" label="Description" errors="messages['metaogdescription']"></input-text>
+                    <input-text input-id="meta-og-type" model="model.settings.MetaOgType" label="Type" max-length="20" errors="messages['metaogtype']"></input-text>
+                    <input-text input-id="meta-og-locale" model="model.settings.MetaOgLocale" label="Local" max-length="10" errors="messages['metaoglocale']"></input-text>
+                </div>
+            </section>
+            <section ng-class="{ 'expanded': model.twitterTagsExpanded }" class="form shadow">
+                <header>
+                    <h3>Twitter Tags <i ng-click="toggleExpandModule('twitterTagsExpanded')"></i></h3>
+                </header>
+                <div class="fields">
+                    <input-image-picker input-id="meta-twitter-image-url" folder="model.uploadFolder" tags="['TwitterCard']" model="model.settings.MetaTwitterImageUrl" resize="{ width: 600, height: 315}" label="Image" hide-list="true" recommend-size="600x315" errors="messages['metatwitterimageurl']"></input-image-picker>
+                    <input-text input-id="meta-twitter-card" model="model.settings.MetaTwitterCard" max-length="20" label="Card" errors="messages['metatwittercard']"></input-text>
+                    <input-text input-id="meta-twitter-site" model="model.settings.MetaTwitterSite" label="Site" max-length="50" errors="messages['metatwittersite']"></input-text>
+                    <input-text input-id="meta-twitter-title" model="model.settings.MetaTwitterTitle" label="Title" max-length="50" errors="messages['metatwittertitle']"></input-text>
+                    <input-text input-id="meta-twitter-description" model="model.settings.MetaTwitterDescription" label="Description" errors="messages['metatwitterdescription']"></input-text>
+                </div>
+            </section>
+            <section ng-class="{ 'expanded': model.errorPagesExpanded }" class="form shadow">
+                <header>
+                    <h3>Error Pages <i ng-click="toggleExpandModule('errorPagesExpanded')"></i></h3>
+                </header>
+                <div class="fields">
+                    <input-image-picker input-id="error-image-icon-top-url" folder="model.uploadFolder" tags="['ErrorPageIcon']" model="model.settings.ErrorImageIconTopUrl" label="Error Page Top Icon" hide-list="true" recommend-size="140x46" errors="messages['errorimageicontopurl']"></input-image-picker>
+                    <input-image-picker input-id="error-image-401-url" folder="model.uploadFolder" tags="['Error401']" model="model.settings.ErrorImage401Url" label="Unauthorized 401" hide-list="true" errors="messages['errorimage401url']"></input-image-picker>
+                    <input-image-picker input-id="error-image-403-url" folder="model.uploadFolder" tags="['Error403']" model="model.settings.ErrorImage403Url" label="Forbidden 403" hide-list="true" errors="messages['errorimage403url']"></input-image-picker>
+                    <input-image-picker input-id="error-image-404-url" folder="model.uploadFolder" tags="['Error404']" model="model.settings.ErrorImage404Url" label="Not Found 404" hide-list="true" errors="messages['errorimage404url']"></input-image-picker>
+                    <input-image-picker input-id="error-image-500-url" folder="model.uploadFolder" tags="['Error500']" model="model.settings.ErrorImage500Url" label="Error 500" hide-list="true" errors="messages['errorimage500url']"></input-image-picker>
+                    <input-image-picker input-id="error-image-503-url" folder="model.uploadFolder" tags="['Error503']" model="model.settings.ErrorImage503Url" label="Maintenance 503" hide-list="true" errors="messages['errorimage503url']"></input-image-picker>
+                </div>
+            </section>
+            <submit-button text="Save Changes" submitting-text="Saving..." loading="submitting"></submit-button>
+            <cancel-button ng-click="resetChanges()">
+        </form>
+    </div> 
+</article>
+
+@section Scripts{
+    <script src="@Url.Content("~/assets/js/hazmat/services/site-settings-service.js")"></script>
+    <script src="@Url.Content("~/assets/js/hazmat/controllers/site-settings-controller.js")"></script>
+}

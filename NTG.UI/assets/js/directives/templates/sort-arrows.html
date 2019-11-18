@@ -1,0 +1,4 @@
+﻿<div class="sort-arrows" ng-class="{'vertical': vertical, 'mobile-small-vertical': mobileSmallVertical}">
+    <i class="prev" title="Move the {{itemName || 'item'}}'s position closer to the beginning" ng-class="{'disabled': disable || index <= 0}" ng-click="swapFunction(collection, index, sortPropertyNamem, true)"></i>
+    <i class="next" title="Move the {{itemName || 'item'}}'s position closer to the end" ng-class="{'disabled': disable || index >= collection.length - 1}" ng-click="swapFunction(collection, index, sortPropertyName, false)"></i>
+</div>

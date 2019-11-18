@@ -1,0 +1,3 @@
+﻿@{
+    Layout = "~/Views/Shared/" + ((ViewContext.RouteData.GetRequiredString("controller").Equals("Error") && Context.Request.RawUrl.StartsWith("/Hazmat", StringComparison.OrdinalIgnoreCase)) || Context.Request.Path.StartsWith("/Hazmat", StringComparison.OrdinalIgnoreCase) ? "_Hazmat.cshtml" : "_NTG.cshtml");
+}

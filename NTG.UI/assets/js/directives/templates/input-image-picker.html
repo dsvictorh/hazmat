@@ -1,0 +1,35 @@
+﻿<div class="input-field image-picker" ng-hide="hide" ng-class="{'with-file': uploading, 'single-file': (hideList && model), 'shadow': panel, 'half-field': halfField, 'left': halfField == 'left', 'right': halfField == 'right'}">
+    <input type="file" accept="image/*" />
+    <label for="{{inputId}}">{{label}} <span ng-if="recommendSize || recommendRatio">(<span ng-if="!compactRecommend" class="hide-small">Recommended size: </span>{{recommendSize}} {{recommendRatio ? '-' : ''}} {{recommendRatio}})</span><i class="required" ng-if="required">*</i></label>
+    <div ng-if="!loaded" class="loading">
+        <div class="loading-icon"></div>
+    </div>
+    <ul ng-if="loaded">
+        <li ng-class="{selected: !model && dataUrl, file: dataUrl || (hideList && model)}" ng-attr-style="{{ hideList && resize ? 'width: ' + resize.width + 'px; height: ' + resize.height + 'px; min-width: ' + resize.width + 'px;' : undefined}}" class="add">
+            <figure ng-if="dataUrl || (hideList && model)">
+                <img ng-if="resize" ng-attr-src="{{(dataUrl || model) | imageResize:resize.width:resize.height}}" />
+                <img ng-if="!resize" ng-attr-src="{{dataUrl || model }}" />
+            </figure>
+            <div class="uploading">
+                <div class="loading-icon"></div>
+            </div>
+        </li>
+        <li ng-if="!hideList" ng-repeat="image in images" ng-class="{selected: !dataUrl && model == image.Image}">
+            <i class="delete-corner small" ng-if="$root.userDetails.isAdmin && model != image.Image" title="Delete image" ng-click="deleteImage(image, $index); $event.stopPropagation()"></i>
+            <figure>
+                <img ng-if="resize" data-image="{{image.Image}}" ng-src="{{image.Image | imageResize:resize.width:resize.height}}" />
+                <img ng-if="!resize" data-image="{{image.Image}}" ng-src="{{image.Image}}" />
+            </figure>
+        </li>
+    </ul>
+    <figure ng-if="!hideList && loaded && (dataUrl || model)">
+        <img ng-if="resize" ng-attr-src="{{(dataUrl || model) | imageResize:resize.width:resize.height}}" />
+        <img ng-if="!resize" ng-attr-src="{{dataUrl || model}}" />
+    </figure>
+    <div class="errors" ng-if="errors && errors.length">
+        <p ng-repeat="error in errors">{{error.Text}}</p>
+    </div>
+    <div class="warnings" ng-if="warnings && warnings.length">
+        <p ng-repeat="warning in warnings" ng-if="warning.applies(model)">{{warning.text}}</p>
+    </div>
+</div>

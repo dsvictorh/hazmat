@@ -1,0 +1,228 @@
+﻿.profilecards{
+    text-align: center;
+
+    &.light{
+        .cards-container > div{
+            background: @color-gray;
+            color: @color-white;
+
+            .content ul.social-links{
+               color: @color-gray;
+
+               li{
+                   background: @color-green;
+                   a{
+                       color: @color-gray;
+                   }
+               }
+           }
+        }
+    }
+    
+    .cards-container{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: stretch;
+
+         @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+            justify-content: center;
+	    }
+
+        > div {
+            flex-basis: ~'calc(33.33% - 24px)';
+            margin: 12px;
+            position: relative;
+            background: @color-lightblue;
+
+            @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+               flex-basis: ~'calc(50% - 24px)';
+	        }
+
+            @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+               flex-basis: 85%;
+               margin: 12px 5px;
+	        }
+
+            .content {
+                margin: 10px;
+                overflow: hidden;
+                .clear(both);
+
+                @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                    position: static;
+                    width: ~'calc(100% - 10px)';
+                    height: ~'calc(100% - 10px)';
+                    margin: 5px;
+	            }
+
+                figure{
+                    width: 25%;
+                    float: left;
+                    overflow: hidden;
+                    border-radius: 50%;
+                    margin: 0 auto;
+
+                    @media screen and (max-width: 768px), screen and (max-device-width: 768px) {
+                        width: 19%;
+	                }
+
+                    @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                       float: none;
+                       text-align: center;
+	                }
+                }
+
+                div{
+                    float: left;
+                    width: 70%;
+                    padding-left: 8px;
+                    box-sizing: border-box;
+                    text-align: left;
+
+                    @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                       float: none;
+                       text-align: center;
+                       width: 100%;
+	                }
+
+                    h3{
+                        cursor: default;
+                        margin: 10px 0;
+                        font-size: 1.6rem;
+
+                        @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                            margin: 5px 0;
+                            font-size: 2.5rem;
+	                    }
+
+                        @media screen and (max-width: 768px), screen and (max-device-width: 1024px) {
+                            font-size: 3rem;
+                            margin-bottom: 15px;
+	                    }
+
+                         @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                            font-size: 2rem;
+                            margin-bottom: 10px;
+	                    }
+                    }
+
+                    ul{
+                        display: flex;
+                        flex-wrap: wrap;
+
+                        &.social-links{
+                            margin-bottom: 15px;
+                            justify-content: flex-start;
+
+                            @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                               justify-content: center;
+	                        }
+
+                            @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                                margin-bottom: 10px;
+	                        }
+
+                            li{
+                                width: 25px;
+                                height: 25px;
+                                font-size: 1.5rem;
+                                background: @color-gray;
+                                overflow: hidden;
+                                border-radius: 50%;
+                                margin: 3px;
+                                .transition(background 0.2s linear);
+                                
+                                @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                                    height: 30px;
+                                    width: 30px;
+                                    font-size: 2.5rem;
+	                            }
+
+
+                                &:hover{
+                                    background: @color-white;
+
+                                     a{
+                                         color: @color-gray;
+                                     }
+                                }
+
+                                a{
+                                    width: 100%;
+                                    display: block;
+                                    height: 100%;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    color: @color-white;
+
+                                    &.facebook{
+                                        .awesome-icon('\f09a');
+                                    }
+
+                                    &.twitter{
+                                        .awesome-icon('\f099');
+                                    }
+
+                                    &.instagram{
+                                        .awesome-icon('\f16d');
+                                    }
+
+                                    &.twitch{
+                                        margin-top: 1px;
+                                        .awesome-icon('\f1e8');
+                                    }
+
+                                    &.youtube{
+                                        .awesome-icon('\f16a');
+                                    }
+                                }
+                            }
+                        }
+
+                        &.other-links{
+                            @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                                justify-content: center;
+	                        }
+
+                            li{
+                                font-size: 1.2rem;
+                                flex-basis: ~'calc(50% - 6px)';
+                                margin: 3px;
+                                box-sizing: border-box;
+                                text-align: left;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                line-height: 1.2;
+
+                                @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                                    text-decoration: underline;
+                                    font-size: 1.5rem;
+                                    flex-basis: ~'calc(33.33% - 6px)';
+	                            }
+
+                                @media screen and (max-width: 480px), screen and (max-device-width: 480px) {
+                                    text-align: center;
+	                            }
+
+                                a{
+                                    color: @color-white;
+
+                                    @media screen and (max-width: 1024px), screen and (max-device-width: 1024px) {
+                                        text-decoration: underline;
+	                                }
+
+                                    &:hover{
+                                        color: @color-green;
+                                        text-decoration: none;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

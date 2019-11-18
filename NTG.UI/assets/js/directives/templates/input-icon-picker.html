@@ -1,0 +1,16 @@
+﻿<div class="input-field icon-picker" ng-hide="hide" ng-class="{'shadow': panel, 'half-field': halfField, 'left': halfField == 'left', 'right': halfField == 'right'}">
+    <label for="{{inputId}}" ng-click="show = !disable && !show;">{{label}}<i class="required" ng-if="required">*</i></label>
+    <span ng-class="{'icon': model, 'disable': disable }" class="{{colorModel}}" ng-click="show = !disable && !show;" ng-bind-html="model || 'Choose icon...'"></span> 
+    <div class="icon-list" ng-class="{'show': show}">
+        <input-text input-id="{{inputId}}-search" model="search" max-length="50" label="Search" errors="null"></input-text>
+        <ul>
+            <li ng-repeat="icon in icons | filter:{name: search}:false"><span class="icon" title="{{icon.name}}" ng-click="chooseIcon(icon.code)" ng-bind-html="icon.code"></span></li>
+        </ul>
+    </div>
+    <div class="errors" ng-if="errors && errors.length">
+        <p ng-repeat="error in errors">{{error.Text}}</p>
+    </div>
+    <div class="warnings" ng-if="warnings && warnings.length">
+        <p ng-repeat="warning in warnings" ng-if="warning.applies(model)">{{warning.text}}</p>
+    </div>
+</div>
